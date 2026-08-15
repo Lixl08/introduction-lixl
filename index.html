@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李欣兰 · 个人简历</title>
+    <style>
+        /* ===== CSS Variables & Theme ===== */
+        :root {
+            --primary: #5b5fef;
+            --primary-light: #7c7ff2;
+            --primary-rgb: 91, 95, 239;
+            --accent: #00b8d4;
+            --accent-rgb: 0, 184, 212;
+            --bg: #f6f7fb;
+            --bg-card: #ffffff;
+            --bg-card-hover: #fafbff;
+            --text-primary: #1a1d27;
+            --text-secondary: #5a5f6e;
+            --text-muted: #8a8fa0;
+            --border: #e4e7ef;
+            --border-focus: #c5c9e8;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+            --nav-bg: rgba(246, 247, 251, 0.82);
+            --gradient-hero: linear-gradient(135deg, #5b5fef 0%, #00b8d4 100%);
+            --gradient-accent: linear-gradient(135deg, rgba(91, 95, 239, 0.12) 0%, rgba(0, 184, 212, 0.12) 100%);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            --max-width: 1120px;
+            --nav-height: 64px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f1117;
+            --bg-card: #1a1d27;
+            --bg-card-hover: #1f2330;
+            --text-primary: #e8eaf0;
+            --text-secondary: #b0b5c4;
+            --text-muted: #7a7f90;
+            --border: #2a2d3a;
+            --border-focus: #3d4155;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.18);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2);
+            --nav-bg: rgba(15, 17, 23, 0.82);
+            --gradient-hero: linear-gradient(135deg, #4a4ee0 0%, #0096b0 100%);
+            --gradient-accent: linear-gradient(135deg, rgba(91, 95, 239, 0.18) 0%, rgba(0, 184, 212, 0.18) 100%);
+        }
+
+        /* ===== Reset & Base ===== */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+            scroll-padding-top: var(--nav-height);
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.65;
+            font-size: 15px;
+            transition: background-color var(--transition-base), color var(--transition-base);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+            background-image: radial-gradient(circle at 20% 50%, rgba(var(--primary-rgb), 0.025) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(var(--accent-rgb), 0.025) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(var(--primary-rgb), 0.02) 0%, transparent 50%);
+            transition: background var(--transition-base);
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        a:hover {
+            color: var(--accent);
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        button {
+            font-family: var(--font-stack);
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: inherit;
+            font-size: inherit;
+            transition: all var(--transition-fast);
+        }
+        button:focus-visible,
+        a:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* ===== Navigation ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: var(--nav-height);
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            transition: background var(--transition-base), border-color var(--transition-base);
+        }
+
+        .navbar-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            white-space: nowrap;
+            cursor: default;
+            user-select: none;
+        }
+        .navbar-brand span {
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .navbar-links a {
+            padding: 6px 14px;
+            font-size: 13.5px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-radius: var(--radius-full);
+            transition: color var(--transition-fast), background var(--transition-fast);
+            white-space: nowrap;
+        }
+        .navbar-links a:hover {
+            color: var(--text-primary);
+            background: var(--gradient-accent);
+        }
+        .navbar-links a.active {
+            color: var(--primary);
+            background: var(--gradient-accent);
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .icon-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-full);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            font-size: 16px;
+            line-height: 1;
+        }
+        .icon-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-1px);
+        }
+
+        /* ===== Layout ===== */
+        .main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: calc(var(--nav-height) + 32px) 24px 80px;
+        }
+
+        .section {
+            margin-bottom: 48px;
+            scroll-margin-top: calc(var(--nav-height) + 16px);
+        }
+
+        .section-header {
+            margin-bottom: 24px;
+        }
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        .section-title {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+        .section-divider {
+            height: 3px;
+            width: 48px;
+            border-radius: var(--radius-full);
+            background: var(--gradient-hero);
+            margin-top: 8px;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            position: relative;
+            padding: 40px 0 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            scroll-margin-top: calc(var(--nav-height) + 16px);
+        }
+        .hero-avatar {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-lg);
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.03em;
+            user-select: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-avatar::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .hero-name {
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+        .hero-title {
+            font-size: clamp(15px, 2.5vw, 18px);
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+        .hero-summary {
+            max-width: 620px;
+            font-size: 15px;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            font-size: 12.5px;
+            font-weight: 500;
+            border-radius: var(--radius-full);
+            background: var(--gradient-accent);
+            color: var(--primary);
+            border: 1px solid rgba(var(--primary-rgb), 0.18);
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+        .badge:hover {
+            border-color: var(--primary);
+            transform: translateY(-1px);
+        }
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--radius-full);
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+        .btn-primary {
+            background: var(--gradient-hero);
+            color: #fff;
+            box-shadow: var(--shadow-md);
+        }
+        .btn-primary:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+            color: #fff;
+        }
+        .btn-outline {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border-color: var(--border);
+        }
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+        .btn svg {
+            flex-shrink: 0;
+        }
+
+        /* ===== Highlights ===== */
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .highlight-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+        .highlight-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-hero);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+        .highlight-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+            border-color: var(--border-focus);
+            background: var(--bg-card-hover);
+        }
+        .highlight-card:hover::before {
+            opacity: 1;
+        }
+        .highlight-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            font-size: 20px;
+            background: var(--gradient-accent);
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        .highlight-card h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+        .highlight-card p {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        /* Cert thumbnails inside highlight card */
+        .cert-thumbs {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+            gap: 6px;
+            margin-top: 12px;
+        }
+        .cert-thumb {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            transition: all var(--transition-fast);
+            background: var(--bg-card-hover);
+        }
+        .cert-thumb:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ===== Lightbox ===== */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.82);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-base), visibility var(--transition-base);
+            padding: 20px;
+        }
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            font-size: 42px;
+            line-height: 1;
+            color: #fff;
+            cursor: pointer;
+            background: none;
+            border: none;
+            opacity: 0.8;
+            transition: opacity var(--transition-fast);
+        }
+        .lightbox-close:hover {
+            opacity: 1;
+        }
+
+        /* ===== Tabs ===== */
+        .tabs-section {
+            scroll-margin-top: calc(var(--nav-height) + 16px);
+        }
+        .tabs-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .tabs-nav {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-card);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+        }
+        .tabs-nav::-webkit-scrollbar {
+            height: 3px;
+        }
+        .tabs-nav::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: var(--radius-full);
+        }
+        .tab-btn {
+            flex-shrink: 0;
+            padding: 14px 20px;
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-bottom: 2.5px solid transparent;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+            letter-spacing: 0.01em;
+            user-select: none;
+        }
+        .tab-btn:hover {
+            color: var(--text-primary);
+            background: var(--gradient-accent);
+        }
+        .tab-btn[aria-selected="true"] {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        .tab-panel {
+            padding: 20px 24px 24px;
+            animation: fadeIn 200ms ease-out;
+        }
+        .tab-panel[hidden] {
+            display: none;
+        }
+
+        .timeline-item {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            padding-left: 20px;
+        }
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 22px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gradient-hero);
+            box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.18);
+        }
+        .timeline-item h5 {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+        .timeline-item .meta {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        .timeline-item ul {
+            margin-top: 6px;
+            padding-left: 0;
+        }
+        .timeline-item li {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            padding-left: 14px;
+            position: relative;
+            margin-bottom: 3px;
+        }
+        .timeline-item li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .empty-state .empty-icon {
+            font-size: 40px;
+            margin-bottom: 12px;
+            opacity: 0.6;
+        }
+
+        /* ===== Skills ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .skill-category {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            transition: all var(--transition-base);
+        }
+        .skill-category:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+            border-color: var(--border-focus);
+        }
+        .skill-category h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .skill-category h4 .cat-icon {
+            font-size: 18px;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: var(--radius-full);
+            background: var(--gradient-accent);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            transition: all var(--transition-fast);
+        }
+        .skill-tag.highlight {
+            color: var(--primary);
+            border-color: rgba(var(--primary-rgb), 0.3);
+            font-weight: 600;
+        }
+        .skill-tag.learning {
+            color: var(--accent);
+            border-color: rgba(var(--accent-rgb), 0.3);
+            border-style: dashed;
+        }
+        .skill-tag:hover {
+            border-color: var(--primary);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
+        }
+        .skill-bar-wrap {
+            margin-top: 8px;
+        }
+        .skill-bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .skill-bar {
+            height: 6px;
+            background: var(--border);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: var(--radius-full);
+            background: var(--gradient-hero);
+            transition: width var(--transition-slow);
+        }
+
+        /* ===== Education & Certificates ===== */
+        .edu-cert-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .edu-cert-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .edu-card,
+        .cert-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 22px;
+            transition: all var(--transition-base);
+        }
+        .edu-card:hover,
+        .cert-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-focus);
+        }
+        .edu-card h4,
+        .cert-card h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .edu-card .school {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .edu-card .degree {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+        .edu-card .period {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+        .edu-card .courses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .course-tag {
+            font-size: 11.5px;
+            padding: 3px 10px;
+            border-radius: var(--radius-full);
+            background: var(--gradient-accent);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        .cert-item {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .cert-item:last-child {
+            border-bottom: none;
+        }
+        .cert-item .cert-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            color: var(--primary);
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 24px 0;
+            text-align: center;
+            font-size: 12.5px;
+            color: var(--text-muted);
+            margin-top: 16px;
+        }
+        .footer a {
+            color: var(--text-secondary);
+        }
+        .footer a:hover {
+            color: var(--primary);
+        }
+
+        /* ===== Back to Top ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(16px);
+            transition: all var(--transition-base);
+            z-index: 900;
+            cursor: pointer;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in {
+            animation: fadeIn 220ms ease-out forwards;
+        }
+        .fade-in-hidden {
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 220ms ease-out, transform 220ms ease-out;
+        }
+        .fade-in-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== Reduced Motion ===== */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .fade-in-hidden {
+                opacity: 1;
+                transform: none;
+            }
+            .highlight-card:hover {
+                transform: none;
+            }
+            .btn:hover {
+                transform: none;
+            }
+            .icon-btn:hover {
+                transform: none;
+            }
+            .skill-category:hover {
+                transform: none;
+            }
+        }
+
+        /* ===== Print Styles ===== */
+        @media print {
+            :root {
+                --bg: #ffffff;
+                --bg-card: #ffffff;
+                --text-primary: #1a1d27;
+                --text-secondary: #4a4f5e;
+                --text-muted: #6a6f80;
+                --border: #d0d3dc;
+                --nav-bg: #ffffff;
+            }
+            body {
+                font-size: 12px;
+                line-height: 1.5;
+                background: #fff;
+            }
+            body::before {
+                display: none;
+            }
+            .navbar {
+                position: static;
+                background: #fff;
+                border-bottom: 2px solid #333;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+            }
+            .navbar-actions,
+            .back-to-top,
+            .lightbox {
+                display: none !important;
+            }
+            .navbar-links {
+                display: none;
+            }
+            .navbar-brand {
+                font-size: 16px;
+                color: #1a1d27;
+                -webkit-text-fill-color: #1a1d27;
+            }
+            .navbar-brand span {
+                background: none;
+                -webkit-text-fill-color: #1a1d27;
+                color: #1a1d27;
+            }
+            .main {
+                padding: 16px 0 24px;
+                max-width: 100%;
+            }
+            .section {
+                margin-bottom: 24px;
+                page-break-inside: avoid;
+            }
+            .hero {
+                padding: 16px 0;
+                text-align: left;
+                align-items: flex-start;
+            }
+            .hero-avatar {
+                display: none;
+            }
+            .hero-name {
+                font-size: 24px;
+            }
+            .hero-badges {
+                justify-content: flex-start;
+            }
+            .hero-actions {
+                justify-content: flex-start;
+            }
+            .btn {
+                padding: 6px 14px;
+                font-size: 11px;
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            .btn-primary {
+                background: #333;
+                color: #fff;
+            }
+            .btn-outline {
+                background: #fff;
+                color: #333;
+            }
+            .highlight-card,
+            .skill-category,
+            .edu-card,
+            .cert-card,
+            .tabs-container {
+                box-shadow: none;
+                border: 1px solid #ccc;
+            }
+            .highlight-card:hover,
+            .skill-category:hover {
+                transform: none;
+                box-shadow: none;
+            }
+            .tabs-nav {
+                border-bottom: 2px solid #333;
+            }
+            .tab-btn[aria-selected="true"] {
+                border-bottom-color: #333;
+                color: #1a1d27;
+            }
+            .footer {
+                border-top: 1px solid #ccc;
+                font-size: 10px;
+            }
+            .section-divider {
+                background: #333;
+            }
+            .badge,
+            .skill-tag,
+            .course-tag {
+                background: #f0f0f0;
+                color: #333;
+                border: 1px solid #ccc;
+                -webkit-text-fill-color: #333;
+            }
+            .cert-thumbs {
+                display: none !important;
+            }
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .navbar-inner {
+                padding: 0 16px;
+                gap: 8px;
+            }
+            .navbar-links {
+                display: none;
+            }
+            .navbar-actions {
+                gap: 6px;
+            }
+            .icon-btn {
+                width: 34px;
+                height: 34px;
+                font-size: 14px;
+            }
+            .main {
+                padding: calc(var(--nav-height) + 20px) 16px 60px;
+            }
+            .section-title {
+                font-size: 22px;
+            }
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .tab-panel {
+                padding: 16px;
+            }
+            .tab-btn {
+                padding: 12px 14px;
+                font-size: 12.5px;
+            }
+            .hero {
+                padding: 24px 0 16px;
+            }
+            .hero-name {
+                font-size: 30px;
+            }
+            .back-to-top {
+                bottom: 16px;
+                right: 16px;
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
+            .cert-thumbs {
+                grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+            }
+        }
+
+        @media (max-width: 420px) {
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .edu-cert-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== Navigation ===== -->
+    <nav class="navbar" role="navigation" aria-label="主导航">
+        <div class="navbar-inner">
+            <div class="navbar-brand">李欣兰 <span>·</span> 简历</div>
+            <div class="navbar-links" role="tablist" aria-label="页面导航">
+                <a href="#hero" role="tab" aria-selected="false">首页</a>
+                <a href="#highlights" role="tab" aria-selected="false">亮点</a>
+                <a href="#experience" role="tab" aria-selected="false" id="nav-exp-link">经历</a>
+                <a href="#projects" role="tab" aria-selected="false" id="nav-proj-link">项目</a>
+                <a href="#skills" role="tab" aria-selected="false">技能</a>
+                <a href="#education" role="tab" aria-selected="false">教育</a>
+            </div>
+            <div class="navbar-actions">
+                <button class="icon-btn" id="themeToggle" aria-label="切换深浅色模式" title="切换深浅色模式">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                </button>
+                <button class="icon-btn" id="printBtn" aria-label="打印简历" title="打印 / 导出PDF">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="6 9 6 2 18 2 18 9"/>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                        <rect x="6" y="14" width="12" height="8"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== Main Content ===== -->
+    <main class="main" id="mainContent">
+
+        <!-- Hero Section -->
+        <section class="hero section" id="hero" aria-label="个人简介">
+            <div class="hero-avatar" aria-hidden="true">
+                <img src="logo.jpg" alt="李欣兰头像">
+            </div>
+            <h1 class="hero-name">李欣兰</h1>
+            <p class="hero-title">计算机科学与技术 · 本科在读</p>
+            <p class="hero-summary" id="heroSummary"></p>
+            <div class="hero-badges" id="heroBadges"></div>
+            <div class="hero-actions" id="heroActions"></div>
+        </section>
+
+        <!-- Highlights Section -->
+        <section class="section" id="highlights" aria-label="亮点成果">
+            <div class="section-header">
+                <p class="section-label">Highlights</p>
+                <h2 class="section-title">亮点成果</h2>
+                <div class="section-divider" aria-hidden="true"></div>
+            </div>
+            <div class="highlights-grid" id="highlightsGrid"></div>
+        </section>
+
+        <!-- Experience Section (Tabs) -->
+        <section class="section tabs-section" id="experience" aria-label="经历" hidden>
+            <div class="section-header">
+                <p class="section-label">Experience</p>
+                <h2 class="section-title">经历</h2>
+                <div class="section-divider" aria-hidden="true"></div>
+            </div>
+            <div class="tabs-container" id="experienceTabsContainer"></div>
+        </section>
+
+        <!-- Projects Section (Tabs) -->
+        <section class="section tabs-section" id="projects" aria-label="项目" hidden>
+            <div class="section-header">
+                <p class="section-label">Projects</p>
+                <h2 class="section-title">项目</h2>
+                <div class="section-divider" aria-hidden="true"></div>
+            </div>
+            <div class="tabs-container" id="projectsTabsContainer"></div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section" id="skills" aria-label="技能">
+            <div class="section-header">
+                <p class="section-label">Skills</p>
+                <h2 class="section-title">技能矩阵</h2>
+                <div class="section-divider" aria-hidden="true"></div>
+            </div>
+            <div class="skills-grid" id="skillsGrid"></div>
+        </section>
+
+        <!-- Education & Certificates -->
+        <section class="section" id="education" aria-label="教育与证书">
+            <div class="section-header">
+                <p class="section-label">Education &amp; Certificates</p>
+                <h2 class="section-title">教育与证书</h2>
+                <div class="section-divider" aria-hidden="true"></div>
+            </div>
+            <div class="edu-cert-grid" id="eduCertGrid"></div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <p>© 2026 李欣兰 · 个人简历 &nbsp;|&nbsp; 最后更新：2026年8月 &nbsp;|&nbsp; <a href="#hero" id="footerTopLink">返回顶部 ↑</a></p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="返回顶部" title="返回顶部">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片预览">
+        <button class="lightbox-close" id="lightboxClose" aria-label="关闭预览">&times;</button>
+        <img id="lightboxImg" src="" alt="证书大图">
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            /* ===== Resume Data ===== */
+            const resume = {
+                name: '李欣兰',
+                title: '计算机科学与技术 本科在读',
+                summary: '计算机科学与技术专业在读，专注于多媒体表达与视觉化呈现。精通 PowerPoint 演示制作与视频剪辑，持有阿里云 Apsara Clouder 多项技能认证，致力于用技术提升信息传递效率。',
+                contact: {
+                    phone: '19895551087',
+                    emailUser: '2180079343',
+                    emailDomain: 'qq.com',
+                    location: '福建福州',
+                    github: 'github.com/Lixl08',
+                    githubUrl: 'https://github.com/Lixl08',
+                    portfolio: null
+                },
+                badges: [
+                    'PowerPoint 视觉化表达',
+                    'Premiere Pro / 剪映',
+                    '阿里云认证',
+                    '计算机科学在读',
+                    '视频剪辑与特效'
+                ],
+                highlights: [{
+                    icon: '☁️',
+                    title: '阿里云 Apsara Clouder 认证系列',
+                    desc: '获得多项云技能专项认证，覆盖云计算核心领域，展现快速学习与技术应用能力。',
+                    images: ['p1.png', 'p2.png', 'p3.png', 'p4.png', 'p5.png', 'p6.png', 'p7.png', 'p8.png']
+                }, {
+                    icon: '📊',
+                    title: 'PowerPoint 视觉化表达',
+                    desc: '精通动画、图表与逻辑框架设计，显著提升演示信息传递效率与专业呈现力。'
+                }, {
+                    icon: '🎬',
+                    title: '视频全流程制作',
+                    desc: '熟练使用 Premiere Pro / 剪映完成剪辑、字幕包装与基础特效合成，具备完整视频产出能力。'
+                }, {
+                    icon: '💻',
+                    title: '计算机科学核心课程',
+                    desc: '系统学习数据结构、算法、操作系统、计算机网络等核心课程，打下扎实技术基础。'
+                }],
+                experience: {
+                    work: [],
+                    internship: [],
+                    campus: []
+                },
+                projects: [],
+                skills: [{
+                    category: '办公与多媒体工具',
+                    icon: '🎨',
+                    items: [
+                        { name: 'PowerPoint', level: 90, highlight: true },
+                        { name: 'Premiere Pro', level: 75, highlight: true },
+                        { name: '剪映专业版', level: 80, highlight: true },
+                        { name: '演示动画设计', level: 85 },
+                        { name: '视觉化表达', level: 88 },
+                        { name: '字幕包装', level: 72 },
+                    ]
+                }, {
+                    category: '计算机专业技能',
+                    icon: '💻',
+                    items: [
+                        { name: '数据结构与算法', level: 40, learning: true },
+                        { name: '数据库原理', level: 35, learning: true },
+                        { name: '操作系统', level: 30, learning: true },
+                        { name: '计算机网络', level: 35, learning: true },
+                        { name: '软件工程', level: 30, learning: true },
+                    ]
+                }],
+                education: {
+                    school: '江苏理工学院',
+                    degree: '本科',
+                    major: '计算机科学与技术',
+                    period: '2026.09 – 2030.09',
+                    gpa: null,
+                    courses: ['数据结构与算法', '数据库系统原理', '操作系统', '计算机网络', '软件工程', '人工智能导论'],
+                    honors: []
+                },
+                certificates: [
+                    '阿里云 Apsara Clouder 专项技能认证系列证书'
+                ]
+            };
+
+            /* ===== DOM References ===== */
+            const themeToggle = document.getElementById('themeToggle');
+            const printBtn = document.getElementById('printBtn');
+            const backToTop = document.getElementById('backToTop');
+            const footerTopLink = document.getElementById('footerTopLink');
+            const navLinks = document.querySelectorAll('.navbar-links a');
+            const navExpLink = document.getElementById('nav-exp-link');
+            const navProjLink = document.getElementById('nav-proj-link');
+            const heroSummary = document.getElementById('heroSummary');
+            const heroBadges = document.getElementById('heroBadges');
+            const heroActions = document.getElementById('heroActions');
+            const highlightsGrid = document.getElementById('highlightsGrid');
+            const experienceSection = document.getElementById('experience');
+            const experienceTabsContainer = document.getElementById('experienceTabsContainer');
+            const projectsSection = document.getElementById('projects');
+            const projectsTabsContainer = document.getElementById('projectsTabsContainer');
+            const skillsGrid = document.getElementById('skillsGrid');
+            const eduCertGrid = document.getElementById('eduCertGrid');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxClose = document.getElementById('lightboxClose');
+
+            /* ===== Helper Functions ===== */
+            function getEmail() {
+                return resume.contact.emailUser + '@' + resume.contact.emailDomain;
+            }
+
+            function escapeHtml(str) {
+                const div = document.createElement('div');
+                div.textContent = str;
+                return div.innerHTML;
+            }
+
+            function copyToClipboard(text) {
+                return new Promise(function(resolve, reject) {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(resolve).catch(function() {
+                            fallbackCopy(text, resolve, reject);
+                        });
+                    } else {
+                        fallbackCopy(text, resolve, reject);
+                    }
+                });
+            }
+
+            function fallbackCopy(text, resolve, reject) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.left = '-9999px';
+                textarea.style.top = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    const ok = document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    if (ok) resolve();
+                    else reject(new Error('copy failed'));
+                } catch (e) {
+                    document.body.removeChild(textarea);
+                    reject(e);
+                }
+            }
+
+            /* ===== Lightbox Functions ===== */
+            function openLightbox(src) {
+                lightboxImg.src = src;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+                lightboxImg.src = '';
+            }
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) closeLightbox();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+            /* ===== Theme Management ===== */
+            function getPreferredTheme() {
+                const stored = localStorage.getItem('theme-preference');
+                if (stored === 'light' || stored === 'dark') return stored;
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+                return 'light';
+            }
+
+            function applyTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme-preference', theme);
+                updateThemeIcon(theme);
+            }
+
+            function updateThemeIcon(theme) {
+                const icon = themeToggle.querySelector('svg');
+                if (!icon) return;
+                if (theme === 'dark') {
+                    themeToggle.innerHTML =
+                        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+                } else {
+                    themeToggle.innerHTML =
+                        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+                }
+            }
+
+            themeToggle.addEventListener('click', function() {
+                const current = document.documentElement.getAttribute('data-theme') || 'light';
+                applyTheme(current === 'dark' ? 'light' : 'dark');
+            });
+            applyTheme(getPreferredTheme());
+
+            if (window.matchMedia) {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                    if (!localStorage.getItem('theme-preference')) {
+                        applyTheme(e.matches ? 'dark' : 'light');
+                    }
+                });
+            }
+
+            /* ===== Print ===== */
+            printBtn.addEventListener('click', function() {
+                window.print();
+            });
+
+            /* ===== Back to Top ===== */
+            function toggleBackToTop() {
+                if (window.scrollY > 400) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            }
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            footerTopLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            window.addEventListener('scroll', toggleBackToTop, { passive: true });
+            toggleBackToTop();
+
+            /* ===== Smooth Scroll for Nav Links ===== */
+            navLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        const target = document.querySelector(href);
+                        if (target && !target.hasAttribute('hidden')) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        } else if (target && target.hasAttribute('hidden')) {
+                            e.preventDefault();
+                            const sections = ['hero', 'highlights', 'skills', 'education'];
+                            const idx = sections.indexOf(href.replace('#', ''));
+                            if (idx > -1) {
+                                const nextSection = document.getElementById(sections[idx]);
+                                if (nextSection && !nextSection.hasAttribute('hidden')) {
+                                    nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+
+            /* ===== Scroll Spy for Nav ===== */
+            const allSections = document.querySelectorAll('.section[id]');
+            const observerOptions = { rootMargin: '-20% 0px -70% 0px', threshold: 0 };
+            const sectionObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting && !entry.target.hasAttribute('hidden')) {
+                        const id = entry.target.id;
+                        navLinks.forEach(function(link) {
+                            if (link.getAttribute('href') === '#' + id) {
+                                link.classList.add('active');
+                                link.setAttribute('aria-selected', 'true');
+                            } else {
+                                link.classList.remove('active');
+                                link.setAttribute('aria-selected', 'false');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+            allSections.forEach(function(section) { sectionObserver.observe(section); });
+
+            /* ===== Render Hero ===== */
+            function renderHero() {
+                heroSummary.textContent = resume.summary;
+                heroBadges.innerHTML = '';
+                resume.badges.forEach(function(badge) {
+                    const span = document.createElement('span');
+                    span.className = 'badge';
+                    span.textContent = badge;
+                    heroBadges.appendChild(span);
+                });
+
+                heroActions.innerHTML = '';
+                const emailBtn = document.createElement('button');
+                emailBtn.className = 'btn btn-primary';
+                emailBtn.setAttribute('id', 'emailCopyBtn');
+                emailBtn.innerHTML =
+                    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> ' +
+                    '<span id="emailDisplay">' + escapeHtml(getEmail()) + '</span>';
+                heroActions.appendChild(emailBtn);
+
+                const phoneBtn = document.createElement('a');
+                phoneBtn.className = 'btn btn-outline';
+                phoneBtn.href = 'tel:' + resume.contact.phone;
+                phoneBtn.innerHTML =
+                    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> ' +
+                    escapeHtml(resume.contact.phone);
+                heroActions.appendChild(phoneBtn);
+
+                if (resume.contact.githubUrl) {
+                    const ghBtn = document.createElement('a');
+                    ghBtn.className = 'btn btn-outline';
+                    ghBtn.href = resume.contact.githubUrl;
+                    ghBtn.target = '_blank';
+                    ghBtn.rel = 'noopener noreferrer';
+                    ghBtn.innerHTML =
+                        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg> ' +
+                        'GitHub';
+                    heroActions.appendChild(ghBtn);
+                }
+
+                const locSpan = document.createElement('span');
+                locSpan.className = 'btn btn-outline';
+                locSpan.style.cursor = 'default';
+                locSpan.innerHTML =
+                    '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> ' +
+                    escapeHtml(resume.contact.location);
+                heroActions.appendChild(locSpan);
+
+                const copyBtn = document.getElementById('emailCopyBtn');
+                if (copyBtn) {
+                    copyBtn.addEventListener('click', function() {
+                        const email = getEmail();
+                        copyToClipboard(email).then(function() {
+                            const display = document.getElementById('emailDisplay');
+                            if (display) {
+                                const original = display.textContent;
+                                display.textContent = '✓ 已复制';
+                                setTimeout(function() {
+                                    display.textContent = original;
+                                }, 1600);
+                            }
+                        }).catch(function() {
+                            try {
+                                window.prompt('复制邮箱地址：', email);
+                            } catch (e) { /* ignore */ }
+                        });
+                    });
+                }
+            }
+
+            /* ===== Render Highlights ===== */
+            function renderHighlights() {
+                highlightsGrid.innerHTML = '';
+                resume.highlights.forEach(function(h) {
+                    const card = document.createElement('div');
+                    card.className = 'highlight-card fade-in-hidden';
+                    let content = '<div class="highlight-icon" aria-hidden="true">' + escapeHtml(h.icon) + '</div>' +
+                        '<h4>' + escapeHtml(h.title) + '</h4>' +
+                        '<p>' + escapeHtml(h.desc) + '</p>';
+
+                    if (h.images && h.images.length) {
+                        content += '<div class="cert-thumbs" aria-label="证书缩略图">';
+                        h.images.forEach(function(imgSrc) {
+                            content +=
+                                '<img src="' + escapeHtml(imgSrc) + '" alt="证书缩略图" class="cert-thumb" loading="lazy" data-full="' +
+                                escapeHtml(imgSrc) + '">';
+                        });
+                        content += '</div>';
+                    }
+
+                    card.innerHTML = content;
+                    highlightsGrid.appendChild(card);
+                });
+
+                highlightsGrid.querySelectorAll('.cert-thumb').forEach(function(img) {
+                    img.addEventListener('click', function() {
+                        const src = img.getAttribute('data-full') || img.getAttribute('src');
+                        openLightbox(src);
+                    });
+                    img.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            const src = img.getAttribute('data-full') || img.getAttribute('src');
+                            openLightbox(src);
+                        }
+                    });
+                    img.setAttribute('tabindex', '0');
+                    img.setAttribute('role', 'button');
+                });
+
+                observeFadeIn(highlightsGrid.querySelectorAll('.fade-in-hidden'));
+            }
+
+            /* ===== Render Experience Tabs ===== */
+            function hasExperienceData() {
+                return resume.experience.work.length > 0 ||
+                    resume.experience.internship.length > 0 ||
+                    resume.experience.campus.length > 0;
+            }
+
+            function renderExperience() {
+                if (!hasExperienceData()) {
+                    experienceSection.setAttribute('hidden', '');
+                    if (navExpLink) navExpLink.style.display = 'none';
+                    return;
+                }
+                experienceSection.removeAttribute('hidden');
+                if (navExpLink) navExpLink.style.display = '';
+
+                const tabs = [
+                    { key: 'work', label: '工作经历', data: resume.experience.work },
+                    { key: 'internship', label: '实习经历', data: resume.experience.internship },
+                    { key: 'campus', label: '校园经历', data: resume.experience.campus }
+                ];
+                const activeTabs = tabs.filter(function(t) { return t.data.length > 0; });
+                if (activeTabs.length === 0) {
+                    experienceSection.setAttribute('hidden', '');
+                    return;
+                }
+
+                experienceTabsContainer.innerHTML = '';
+                const tabsNav = document.createElement('div');
+                tabsNav.className = 'tabs-nav';
+                tabsNav.setAttribute('role', 'tablist');
+                tabsNav.setAttribute('aria-label', '经历分类');
+
+                activeTabs.forEach(function(tab, idx) {
+                    const btn = document.createElement('button');
+                    btn.className = 'tab-btn';
+                    btn.setAttribute('role', 'tab');
+                    btn.setAttribute('id', 'exp-tab-' + tab.key);
+                    btn.setAttribute('aria-controls', 'exp-panel-' + tab.key);
+                    btn.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+                    btn.setAttribute('tabindex', idx === 0 ? '0' : '-1');
+                    btn.textContent = tab.label;
+                    tabsNav.appendChild(btn);
+                });
+                experienceTabsContainer.appendChild(tabsNav);
+
+                activeTabs.forEach(function(tab, idx) {
+                    const panel = document.createElement('div');
+                    panel.className = 'tab-panel';
+                    panel.setAttribute('role', 'tabpanel');
+                    panel.setAttribute('id', 'exp-panel-' + tab.key);
+                    panel.setAttribute('aria-labelledby', 'exp-tab-' + tab.key);
+                    if (idx > 0) panel.setAttribute('hidden', '');
+
+                    if (tab.data.length === 0) {
+                        panel.innerHTML = '<div class="empty-state"><div class="empty-icon">📋</div><p>暂无相关经历</p></div>';
+                    } else {
+                        tab.data.forEach(function(item) {
+                            const div = document.createElement('div');
+                            div.className = 'timeline-item';
+                            let dutiesHtml = '';
+                            if (item.duties && item.duties.length) {
+                                dutiesHtml = '<ul>' + item.duties.map(function(d) {
+                                    return '<li>' + escapeHtml(d) + '</li>';
+                                }).join('') + '</ul>';
+                            }
+                            div.innerHTML =
+                                '<h5>' + escapeHtml(item.title || item.role || '') + '</h5>' +
+                                '<div class="meta">' + escapeHtml(item.company || item.org || '') +
+                                (item.period ? ' · ' + escapeHtml(item.period) : '') + '</div>' +
+                                dutiesHtml;
+                            panel.appendChild(div);
+                        });
+                    }
+                    experienceTabsContainer.appendChild(panel);
+                });
+
+                initTabs(experienceTabsContainer);
+            }
+
+            /* ===== Render Projects Tabs ===== */
+            function renderProjects() {
+                if (resume.projects.length === 0) {
+                    projectsSection.setAttribute('hidden', '');
+                    if (navProjLink) navProjLink.style.display = 'none';
+                    return;
+                }
+                projectsSection.removeAttribute('hidden');
+                if (navProjLink) navProjLink.style.display = '';
+
+                const categories = {};
+                resume.projects.forEach(function(p) {
+                    const cat = p.category || '全部项目';
+                    if (!categories[cat]) categories[cat] = [];
+                    categories[cat].push(p);
+                });
+                const catKeys = Object.keys(categories);
+
+                projectsTabsContainer.innerHTML = '';
+                const tabsNav = document.createElement('div');
+                tabsNav.className = 'tabs-nav';
+                tabsNav.setAttribute('role', 'tablist');
+                tabsNav.setAttribute('aria-label', '项目分类');
+
+                catKeys.forEach(function(cat, idx) {
+                    const btn = document.createElement('button');
+                    btn.className = 'tab-btn';
+                    btn.setAttribute('role', 'tab');
+                    btn.setAttribute('id', 'proj-tab-' + idx);
+                    btn.setAttribute('aria-controls', 'proj-panel-' + idx);
+                    btn.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+                    btn.setAttribute('tabindex', idx === 0 ? '0' : '-1');
+                    btn.textContent = cat;
+                    tabsNav.appendChild(btn);
+                });
+                projectsTabsContainer.appendChild(tabsNav);
+
+                catKeys.forEach(function(cat, idx) {
+                    const panel = document.createElement('div');
+                    panel.className = 'tab-panel';
+                    panel.setAttribute('role', 'tabpanel');
+                    panel.setAttribute('id', 'proj-panel-' + idx);
+                    panel.setAttribute('aria-labelledby', 'proj-tab-' + idx);
+                    if (idx > 0) panel.setAttribute('hidden', '');
+
+                    const grid = document.createElement('div');
+                    grid.style.cssText =
+                        'display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;';
+                    categories[cat].forEach(function(p) {
+                        const card = document.createElement('div');
+                        card.className = 'highlight-card';
+                        card.style.padding = '18px';
+                        let techHtml = '';
+                        if (p.tech && p.tech.length) {
+                            techHtml = '<div style="display:flex;flex-wrap:wrap;gap:5px;margin:8px 0;">' +
+                                p.tech.map(function(t) {
+                                    return '<span class="skill-tag" style="font-size:10.5px;padding:3px 8px;">' +
+                                        escapeHtml(t) + '</span>';
+                                }).join('') + '</div>';
+                        }
+                        let linkHtml = '';
+                        if (p.link) {
+                            linkHtml =
+                                '<a href="' + escapeHtml(p.link) + '" target="_blank" rel="noopener noreferrer" style="font-size:12px;font-weight:600;">查看链接 →</a>';
+                        }
+                        card.innerHTML =
+                            '<h4 style="font-size:14px;font-weight:600;margin-bottom:4px;">' + escapeHtml(p.name) +
+                            '</h4>' +
+                            '<p style="font-size:12.5px;color:var(--text-muted);margin-bottom:4px;">' +
+                            escapeHtml(p.period || '') + '</p>' +
+                            techHtml +
+                            '<p style="font-size:12.5px;color:var(--text-secondary);line-height:1.6;margin-bottom:6px;">' +
+                            escapeHtml(p.result || p.description || '') + '</p>' +
+                            linkHtml;
+                        grid.appendChild(card);
+                    });
+                    panel.appendChild(grid);
+                    projectsTabsContainer.appendChild(panel);
+                });
+
+                initTabs(projectsTabsContainer);
+            }
+
+            /* ===== Generic Tabs Initializer ===== */
+            function initTabs(container) {
+                const tabs = container.querySelectorAll('.tab-btn');
+                const panels = container.querySelectorAll('.tab-panel');
+                let currentIndex = 0;
+
+                function activateTab(index) {
+                    tabs.forEach(function(tab, i) {
+                        const isActive = i === index;
+                        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                        tab.setAttribute('tabindex', isActive ? '0' : '-1');
+                    });
+                    panels.forEach(function(panel, i) {
+                        if (i === index) {
+                            panel.removeAttribute('hidden');
+                            panel.classList.add('fade-in');
+                            setTimeout(function() { panel.classList.remove('fade-in'); }, 250);
+                        } else {
+                            panel.setAttribute('hidden', '');
+                        }
+                    });
+                    currentIndex = index;
+                }
+
+                tabs.forEach(function(tab, index) {
+                    tab.addEventListener('click', function() {
+                        activateTab(index);
+                    });
+                    tab.addEventListener('keydown', function(e) {
+                        let newIndex = -1;
+                        if (e.key === 'ArrowRight') {
+                            e.preventDefault();
+                            newIndex = (index + 1) % tabs.length;
+                        } else if (e.key === 'ArrowLeft') {
+                            e.preventDefault();
+                            newIndex = (index - 1 + tabs.length) % tabs.length;
+                        } else if (e.key === 'Home') {
+                            e.preventDefault();
+                            newIndex = 0;
+                        } else if (e.key === 'End') {
+                            e.preventDefault();
+                            newIndex = tabs.length - 1;
+                        }
+                        if (newIndex > -1 && newIndex !== index) {
+                            activateTab(newIndex);
+                            tabs[newIndex].focus();
+                        }
+                    });
+                });
+
+                activateTab(0);
+            }
+
+            /* ===== Render Skills ===== */
+            function renderSkills() {
+                skillsGrid.innerHTML = '';
+                resume.skills.forEach(function(cat) {
+                    const card = document.createElement('div');
+                    card.className = 'skill-category fade-in-hidden';
+                    let itemsHtml = '<div class="skill-tags">';
+                    cat.items.forEach(function(item) {
+                        let cls = 'skill-tag';
+                        if (item.highlight) cls += ' highlight';
+                        if (item.learning) cls += ' learning';
+                        const label = item.learning ? item.name + ' (学习中)' : item.name;
+                        itemsHtml += '<span class="' + cls + '">' + escapeHtml(label) + '</span>';
+                    });
+                    itemsHtml += '</div>';
+                    let barsHtml = '';
+                    cat.items.slice(0, 4).forEach(function(item) {
+                        // 修改：若为学习中的项，进度随机为 1% ~ 8%
+                        const displayLevel = item.learning ? Math.floor(Math.random() * 8) + 1 : item.level;
+                        barsHtml +=
+                            '<div class="skill-bar-wrap">' +
+                            '<div class="skill-bar-label"><span>' + escapeHtml(item.name) + '</span><span>' +
+                            displayLevel + '%</span></div>' +
+                            '<div class="skill-bar"><div class="skill-bar-fill" style="width:' + displayLevel +
+                            '%"></div></div>' +
+                            '</div>';
+                    });
+                    card.innerHTML =
+                        '<h4><span class="cat-icon">' + escapeHtml(cat.icon) + '</span>' + escapeHtml(cat
+                            .category) + '</h4>' +
+                        itemsHtml +
+                        '<div style="margin-top:14px;">' + barsHtml + '</div>';
+                    skillsGrid.appendChild(card);
+                });
+                observeFadeIn(skillsGrid.querySelectorAll('.fade-in-hidden'));
+            }
+
+            /* ===== Render Education & Certificates ===== */
+            function renderEducationCertificates() {
+                eduCertGrid.innerHTML = '';
+
+                if (resume.education && resume.education.school) {
+                    const eduCard = document.createElement('div');
+                    eduCard.className = 'edu-card fade-in-hidden';
+                    let coursesHtml = '';
+                    if (resume.education.courses && resume.education.courses.length) {
+                        coursesHtml = '<div style="margin-top:10px;"><div style="font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:6px;">主修课程</div><div class="courses">' +
+                            resume.education.courses.map(function(c) {
+                                return '<span class="course-tag">' + escapeHtml(c) + '</span>';
+                            }).join('') + '</div></div>';
+                    }
+                    eduCard.innerHTML =
+                        '<h4>🎓 教育背景</h4>' +
+                        '<div class="school">' + escapeHtml(resume.education.school) + '</div>' +
+                        '<div class="degree">' + escapeHtml(resume.education.major) + ' · ' + escapeHtml(resume
+                            .education.degree) + '</div>' +
+                        '<div class="period">' + escapeHtml(resume.education.period) + '</div>' +
+                        (resume.education.gpa ? '<div style="font-size:12px;color:var(--text-secondary);">GPA: ' +
+                            escapeHtml(resume.education.gpa) + '</div>' : '') +
+                        coursesHtml;
+                    eduCertGrid.appendChild(eduCard);
+                }
+
+                if (resume.certificates && resume.certificates.length) {
+                    const certCard = document.createElement('div');
+                    certCard.className = 'cert-card fade-in-hidden';
+                    let certHtml = '<h4>📜 获奖与证书</h4>';
+                    resume.certificates.forEach(function(cert) {
+                        certHtml +=
+                            '<div class="cert-item"><span class="cert-icon">🏅</span><span>' +
+                            escapeHtml(cert) + '</span></div>';
+                    });
+                    certCard.innerHTML = certHtml;
+                    eduCertGrid.appendChild(certCard);
+                }
+
+                observeFadeIn(eduCertGrid.querySelectorAll('.fade-in-hidden'));
+            }
+
+            /* ===== Fade-in Observer ===== */
+            function observeFadeIn(elements) {
+                if (!('IntersectionObserver' in window)) {
+                    elements.forEach(function(el) {
+                        el.classList.add('fade-in-visible');
+                        el.classList.remove('fade-in-hidden');
+                    });
+                    return;
+                }
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('fade-in-visible');
+                            entry.target.classList.remove('fade-in-hidden');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+                elements.forEach(function(el) { observer.observe(el); });
+            }
+
+            /* ===== Nav Link Visibility ===== */
+            function updateNavVisibility() {
+                if (navExpLink) {
+                    if (!hasExperienceData()) {
+                        navExpLink.style.display = 'none';
+                    } else {
+                        navExpLink.style.display = '';
+                    }
+                }
+                if (navProjLink) {
+                    if (resume.projects.length === 0) {
+                        navProjLink.style.display = 'none';
+                    } else {
+                        navProjLink.style.display = '';
+                    }
+                }
+            }
+
+            /* ===== Initialize ===== */
+            function init() {
+                renderHero();
+                renderHighlights();
+                renderExperience();
+                renderProjects();
+                renderSkills();
+                renderEducationCertificates();
+                updateNavVisibility();
+                toggleBackToTop();
+            }
+
+            init();
+
+            // 动态更新渲染能力（供后续使用）
+            window.__resumeData = resume;
+            window.__renderAll = function() {
+                renderExperience();
+                renderProjects();
+                updateNavVisibility();
+            };
+
+        })();
+    </script>
+</body>
+</html>
