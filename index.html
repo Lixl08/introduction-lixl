@@ -1,1179 +1,1458 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>李欣兰 · 个人简历</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李欣兰 · 个人简历 | AIGC 内容创作 · Vibe Coding · 视频后期</title>
+<meta name="description" content="李欣兰，计算机科学与技术本科在读，专注 AIGC 内容创作、Vibe Coding 自然语言编程与视频剪辑后期。">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Google Fonts: Plus Jakarta Sans -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Plus Jakarta Sans（Google Fonts；加载失败时自动回退系统无衬线字体） -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', '"Noto Sans SC"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
-                    },
-                    colors: {
-                        ink: {
-                            950: '#030712',
-                            900: '#0b1020',
-                            800: '#111729',
-                        },
-                    },
-                }
-            }
-        };
-    </script>
+<!-- Tailwind CSS（Play CDN） -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"',
+                 '"PingFang SC"', '"Hiragino Sans GB"', '"Microsoft YaHei"', '"Helvetica Neue"',
+                 'Helvetica', 'Arial', 'sans-serif']
+        },
+        colors: {
+          /* 主题色板（随 data-theme 切换的 RGB 三元组，支持 Tailwind 透明度修饰符） */
+          base:     'rgb(var(--c-bg) / <alpha-value>)',
+          surface:  'rgb(var(--c-surface) / <alpha-value>)',
+          elevated: 'rgb(var(--c-elevated) / <alpha-value>)',
+          line:     'rgb(var(--c-line) / <alpha-value>)',
+          ink:      'rgb(var(--c-ink) / <alpha-value>)',
+          soft:     'rgb(var(--c-soft) / <alpha-value>)',
+          mute:     'rgb(var(--c-mute) / <alpha-value>)'
+        }
+      }
+    }
+  };
+</script>
 
-    <style>
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Plus Jakarta Sans', 'Noto Sans SC', system-ui, sans-serif;
-            background-color: #030712;
-            color: #e2e8f0;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-        }
+<!-- 尽早确定主题（默认深色，遵循用户上次选择） -->
+<script>
+(function () {
+  try {
+    var saved = localStorage.getItem('resume-theme');
+    document.documentElement.setAttribute('data-theme', saved === 'light' ? 'light' : 'dark');
+  } catch (e) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+})();
+</script>
 
-        /* ===== Background Glow Blobs ===== */
-        .glow-blob {
-            position: fixed;
-            border-radius: 9999px;
-            filter: blur(140px);
-            pointer-events: none;
-            z-index: 0;
-        }
-        .glow-cyan {
-            top: -180px;
-            left: -160px;
-            width: 560px;
-            height: 560px;
-            background: radial-gradient(circle, rgba(34, 211, 238, 0.18) 0%, rgba(34, 211, 238, 0) 70%);
-        }
-        .glow-indigo {
-            bottom: -200px;
-            right: -180px;
-            width: 620px;
-            height: 620px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, rgba(99, 102, 241, 0) 70%);
-        }
+<style type="text/tailwindcss">
+@layer base {
+  :root, [data-theme="dark"] {
+    color-scheme: dark;
+    --c-bg: 3 7 18;            /* slate-950 */
+    --c-surface: 15 23 42;     /* slate-900 */
+    --c-elevated: 30 41 59;    /* slate-800 */
+    --c-line: 226 232 240;     /* slate-200（以低透明度使用） */
+    --c-ink: 248 250 252;      /* slate-50  */
+    --c-soft: 203 213 225;     /* slate-300 */
+    --c-mute: 148 163 184;     /* slate-400 */
+    --blob-op: .13;
+  }
+  [data-theme="light"] {
+    color-scheme: light;
+    --c-bg: 244 247 251;
+    --c-surface: 255 255 255;
+    --c-elevated: 241 245 249;
+    --c-line: 15 23 42;
+    --c-ink: 15 23 42;
+    --c-soft: 51 65 85;
+    --c-mute: 100 116 139;
+    --blob-op: .07;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-base font-sans text-soft antialiased;
+    line-height: 1.7;
+    overflow-x: hidden;
+    transition: background-color .25s ease, color .25s ease;
+  }
+  ::selection { background: rgba(34, 211, 238, .28); }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, .3); border-radius: 999px; border: 2px solid transparent; background-clip: content-box; }
+  button { @apply cursor-pointer border-none bg-transparent; color: inherit; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+}
 
-        /* ===== Glass card base ===== */
-        .glass {
-            background: rgba(15, 23, 42, 0.55);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 1rem;
-        }
-        .glass-strong {
-            background: rgba(15, 23, 42, 0.72);
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-        }
+@layer components {
+  .container { @apply mx-auto w-full max-w-[1080px] px-5; }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "PingFang SC", monospace; }
 
-        /* ===== Gradient text ===== */
-        .text-gradient {
-            background: linear-gradient(135deg, #67e8f9 0%, #22d3ee 40%, #818cf8 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .text-gradient-num {
-            background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 50%, #6366f1 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+  /* ---------- 毛玻璃卡片 ---------- */
+  .card {
+    @apply relative rounded-2xl border border-line/10 bg-surface/60 backdrop-blur-xl;
+    box-shadow: 0 10px 34px -20px rgba(2, 8, 23, .75);
+    transition: transform .22s cubic-bezier(.22,.61,.36,1),
+                box-shadow .22s cubic-bezier(.22,.61,.36,1),
+                border-color .22s ease, background-color .25s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(34, 211, 238, .30);
+    box-shadow: 0 26px 54px -22px rgba(34, 211, 238, .28),
+                0 10px 34px -20px rgba(2, 8, 23, .75);
+  }
 
-        /* ===== Cyan pill badge ===== */
-        .pill-cyan {
-            background: rgba(34, 211, 238, 0.08);
-            border: 1px solid rgba(34, 211, 238, 0.22);
-            color: #67e8f9;
-            border-radius: 9999px;
-            padding: 4px 12px;
-            font-size: 12px;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .pill-cyan:hover {
-            border-color: rgba(34, 211, 238, 0.5);
-            background: rgba(34, 211, 238, 0.14);
-            transform: translateY(-1px);
-        }
+  /* ---------- 徽章 ---------- */
+  .badge {
+    @apply inline-flex items-center gap-1.5 whitespace-nowrap rounded-full
+           border border-cyan-500/20 bg-cyan-500/10 px-3 py-[3px]
+           text-[12.5px] font-medium text-cyan-300;
+  }
+  .badge.ghost { @apply border-line/15 bg-white/5 text-soft; }
+  .badge.violet { @apply border-indigo-400/25 bg-indigo-400/10 text-indigo-300; }
 
-        /* ===== Buttons with hover glow ===== */
-        .btn-glow {
-            position: relative;
-            transition: all 220ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .btn-glow::after {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            border-radius: inherit;
-            background: linear-gradient(135deg, rgba(34, 211, 238, 0.55), rgba(99, 102, 241, 0.55));
-            filter: blur(12px);
-            opacity: 0;
-            z-index: -1;
-            transition: opacity 220ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .btn-glow:hover::after { opacity: 0.85; }
-        .btn-glow:hover { transform: translateY(-2px); }
+  /* ---------- 渐变文字 / 按钮 ---------- */
+  .grad, .stat-value, .section-head h2 em {
+    background-image: linear-gradient(120deg, #22d3ee 0%, #38bdf8 45%, #818cf8 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 whitespace-nowrap rounded-xl border px-5 py-2.5
+           text-sm font-semibold transition-all duration-200;
+  }
+  .btn svg { @apply h-4 w-4; }
+  .btn-primary {
+    background-image: linear-gradient(135deg, #06b6d4, #6366f1);
+    color: #fff; border-color: transparent;
+    box-shadow: 0 10px 26px -10px rgba(34, 211, 238, .6);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 36px -10px rgba(34, 211, 238, .7); }
+  .btn-ghost { @apply border-line/15 bg-white/5 text-ink; }
+  .btn-ghost:hover {
+    transform: translateY(-2px);
+    border-color: rgba(34, 211, 238, .45); color: #67e8f9;
+    box-shadow: 0 10px 26px -14px rgba(34, 211, 238, .45);
+  }
+  .btn.copy.copied { border-color: rgba(52, 211, 153, .6); color: #34d399; box-shadow: 0 0 0 3px rgba(52, 211, 153, .12); }
 
-        /* ===== Highlight card hover ===== */
-        .stat-card {
-            transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1), border-color 280ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .stat-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(34, 211, 238, 0.35);
-            box-shadow: 0 18px 40px -12px rgba(34, 211, 238, 0.28), 0 0 0 1px rgba(34, 211, 238, 0.1) inset;
-        }
-        .stat-card:hover .stat-num {
-            text-shadow: 0 0 22px rgba(34, 211, 238, 0.55);
-        }
+  /* ---------- 导航 ---------- */
+  .nav { @apply fixed inset-x-0 top-0 z-[100] h-16 border-b border-line/10 bg-base/70 backdrop-blur-2xl; }
+  .nav-inner { @apply flex h-full items-center gap-[18px]; }
+  .brand { @apply flex items-center gap-2.5 whitespace-nowrap font-bold text-ink text-[17px]; }
+  .brand-mark {
+    @apply grid h-[34px] w-[34px] shrink-0 place-items-center rounded-[10px] text-[15px] text-white;
+    background-image: linear-gradient(135deg, #06b6d4, #6366f1);
+    box-shadow: 0 6px 18px -4px rgba(34, 211, 238, .6);
+  }
+  .brand small { @apply mt-px block font-medium tracking-wide text-mute text-[11px]; }
+  .nav-links { @apply ml-auto flex gap-1 overflow-x-auto; scrollbar-width: none; }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a {
+    @apply whitespace-nowrap rounded-full px-[13px] py-[7px] text-sm text-mute transition-all duration-200;
+  }
+  .nav-links a:hover { color: #67e8f9; background: rgba(34, 211, 238, .1); }
+  .nav-links a.active { color: #67e8f9; background: rgba(34, 211, 238, .12); @apply font-semibold; }
+  .nav-actions { @apply flex shrink-0 gap-2; }
+  .icon-btn {
+    @apply grid h-[38px] w-[38px] place-items-center rounded-[10px] border border-line/10
+           bg-surface/60 text-mute backdrop-blur transition-all duration-200;
+  }
+  .icon-btn:hover { transform: translateY(-1px); border-color: rgba(34, 211, 238, .45); color: #67e8f9; }
+  .icon-btn svg { @apply h-[18px] w-[18px]; }
+  .icon-btn .icon-moon { display: none; }
+  [data-theme="dark"] .icon-btn .icon-sun { display: none; }
+  [data-theme="dark"] .icon-btn .icon-moon { display: block; }
+  .print-label { display: none; }
 
-        /* ===== Timeline ===== */
-        .timeline-rail {
-            position: absolute;
-            left: 11px;
-            top: 8px;
-            bottom: 8px;
-            width: 2px;
-            background: linear-gradient(180deg, rgba(34, 211, 238, 0.45), rgba(99, 102, 241, 0.15) 80%, transparent);
-        }
-        .timeline-dot {
-            position: absolute;
-            left: 4px;
-            top: 6px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #22d3ee, #6366f1);
-            box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.12), 0 0 12px rgba(34, 211, 238, 0.5);
-        }
+  /* ---------- 区块标题 ---------- */
+  section { @apply py-[58px]; scroll-margin-top: 82px; }
+  .section-head { @apply mb-[30px]; }
+  .head-row { @apply flex items-center gap-3.5; }
+  .head-icon {
+    @apply grid h-10 w-10 shrink-0 place-items-center rounded-xl
+           border border-cyan-400/20 bg-cyan-400/10 text-cyan-300;
+  }
+  .head-icon svg { @apply h-5 w-5; }
+  .section-index { @apply text-xs font-semibold tracking-[0.2em] text-cyan-400; }
+  .section-head h2 { @apply mt-1 text-[26px] font-extrabold tracking-tight text-ink md:text-[32px]; }
+  .section-head > p { @apply mt-2.5 text-sm text-mute; }
 
-        /* ===== Skill bar ===== */
-        .skill-bar-fill {
-            background: linear-gradient(90deg, #06b6d4 0%, #22d3ee 50%, #818cf8 100%);
-            box-shadow: 0 0 8px rgba(34, 211, 238, 0.5);
-            transition: width 800ms cubic-bezier(0.4, 0, 0.2, 1);
-        }
+  /* ---------- Hero ---------- */
+  .hero { padding-top: calc(64px + 56px); padding-bottom: 40px; }
+  .hero-grid { @apply grid items-center gap-10; grid-template-columns: 1.55fr 1fr; }
+  .hero-eyebrow {
+    @apply mb-[18px] inline-flex items-center gap-2 rounded-full
+           border border-cyan-400/20 bg-cyan-400/10 px-3.5 py-1.5
+           text-[13px] font-semibold text-cyan-300;
+  }
+  .hero h1 { @apply font-extrabold tracking-tight text-ink; font-size: clamp(34px, 5.5vw, 54px); line-height: 1.15; }
+  .hero-role { @apply mt-3 font-medium text-soft; font-size: clamp(15px, 2vw, 17px); }
+  .hero-role span + span::before { content: "／"; color: rgb(var(--c-mute)); margin: 0 8px; font-weight: 400; }
+  .hero-intro { @apply mt-[18px] max-w-[56ch] text-[15.5px] text-mute; }
+  .keyword-row { @apply mt-[22px] flex flex-wrap gap-2; }
+  .cta-row { @apply mt-7 flex flex-wrap gap-2.5; }
 
-        /* ===== Tab nav ===== */
-        .tab-btn-2 {
-            position: relative;
-            padding: 12px 18px;
-            font-size: 13.5px;
-            font-weight: 600;
-            color: #94a3b8;
-            white-space: nowrap;
-            transition: color 200ms;
-        }
-        .tab-btn-2:hover { color: #e2e8f0; }
-        .tab-btn-2[aria-selected="true"] { color: #67e8f9; }
-        .tab-btn-2[aria-selected="true"]::after {
-            content: "";
-            position: absolute;
-            left: 18px; right: 18px; bottom: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #22d3ee, #6366f1);
-            border-radius: 9999px;
-        }
+  /* Hero 资料卡 */
+  .profile-card { @apply relative overflow-hidden rounded-[22px] p-7; }
+  .profile-card::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(420px 180px at 85% -10%, rgba(34, 211, 238, .18), transparent 70%),
+      linear-gradient(135deg, rgba(34, 211, 238, .10), rgba(129, 140, 248, .10) 55%, transparent);
+  }
+  .profile-card > * { position: relative; }
+  .avatar {
+    @apply relative mx-auto grid h-[88px] w-[88px] shrink-0 place-items-center rounded-full;
+    margin-top: 6px; margin-bottom: 14px;
+    border: 3px solid rgb(var(--c-bg));
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, .4), 0 14px 34px -12px rgba(34, 211, 238, .55);
+  }
+  .avatar img, .avatar svg { @apply h-full w-full rounded-full object-cover; }
+  .profile-name { @apply relative text-center text-[21px] font-extrabold text-ink; }
+  .profile-sub { @apply mt-0.5 text-center text-[13px] text-mute; }
+  .meta-list { @apply mt-5 grid gap-[9px]; }
+  .meta-item { @apply flex items-center gap-2.5 text-[13.5px] text-soft; }
+  .meta-item svg { @apply h-4 w-4 shrink-0 text-cyan-400; }
+  .meta-item b { @apply font-semibold text-ink; }
+  .hobby-chips { @apply mt-1 flex flex-wrap gap-1.5; }
 
-        /* ===== Cert thumbnails ===== */
-        .cert-thumb {
-            aspect-ratio: 3/4;
-            object-fit: cover;
-            border-radius: 0.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(15, 23, 42, 0.6);
-            cursor: pointer;
-            transition: all 200ms;
-        }
-        .cert-thumb:hover {
-            transform: scale(1.04);
-            border-color: rgba(34, 211, 238, 0.5);
-            box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.2), 0 10px 24px -8px rgba(34, 211, 238, 0.3);
-        }
+  /* ---------- 亮点指标看板 ---------- */
+  .stat-grid { @apply grid grid-cols-4 gap-4; }
+  .stat { @apply relative overflow-hidden p-6; }
+  .stat::after {
+    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+    background-image: linear-gradient(90deg, #22d3ee, #818cf8);
+    transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
+  }
+  .stat:hover::after { transform: scaleX(1); }
+  .stat-value {
+    @apply bg-gradient-to-r from-cyan-300 via-cyan-200 to-indigo-300 bg-clip-text font-extrabold leading-tight text-transparent;
+    font-size: clamp(26px, 3.4vw, 34px);
+  }
+  .stat-label { @apply mt-1.5 text-sm font-bold text-ink; }
+  .stat-desc { @apply mt-[5px] text-[12.5px] leading-relaxed text-mute; }
 
-        /* ===== Lightbox ===== */
-        .lightbox {
-            position: fixed;
-            inset: 0;
-            background: rgba(3, 7, 18, 0.92);
-            backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 220ms, visibility 220ms;
-            padding: 24px;
-        }
-        .lightbox.active { opacity: 1; visibility: visible; }
-        .lightbox img {
-            max-width: 92vw;
-            max-height: 88vh;
-            object-fit: contain;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-        }
+  /* ---------- Tabs ---------- */
+  .tablist {
+    @apply mb-6 inline-flex flex-wrap gap-1.5 rounded-2xl border border-line/10
+           bg-surface/60 p-1.5 backdrop-blur-xl;
+  }
+  .tab { @apply rounded-xl px-[18px] py-2 text-sm font-semibold text-mute transition-all duration-200; }
+  .tab:hover { color: #67e8f9; }
+  .tab[aria-selected="true"] {
+    color: #fff;
+    background-image: linear-gradient(135deg, #06b6d4, #6366f1);
+    box-shadow: 0 8px 20px -8px rgba(34, 211, 238, .65);
+  }
+  .tab:focus-visible, .btn:focus-visible, .icon-btn:focus-visible, .nav-links a:focus-visible,
+  .cert-thumb:focus-visible {
+    outline: 2px solid #22d3ee; outline-offset: 2px;
+  }
+  .tab-panel { animation: panelIn .25s cubic-bezier(.22,.61,.36,1); }
 
-        /* ===== Toast ===== */
-        .toast {
-            position: fixed;
-            left: 50%;
-            bottom: 32px;
-            transform: translate(-50%, 24px);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 280ms, transform 280ms, visibility 280ms;
-            z-index: 1500;
-            pointer-events: none;
-        }
-        .toast.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translate(-50%, 0);
-        }
+  /* ---------- 经历时间线 ---------- */
+  .timeline { @apply relative grid gap-[22px] pl-[26px]; }
+  .timeline::before {
+    content: ""; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 2px; border-radius: 2px;
+    background: linear-gradient(rgba(34,211,238,.7), rgba(129,140,248,.6), transparent);
+  }
+  .tl-item { @apply relative p-6; }
+  .tl-item::before {
+    content: ""; position: absolute; left: -27px; top: 28px; width: 12px; height: 12px; border-radius: 50%;
+    background-image: linear-gradient(135deg, #22d3ee, #818cf8);
+    border: 3px solid rgb(var(--c-bg));
+    box-shadow: 0 0 0 2px rgba(34, 211, 238, .4);
+  }
+  .tl-top { @apply flex flex-wrap items-baseline gap-x-3.5 gap-y-2; }
+  .tl-org { @apply text-[16.5px] font-bold text-ink; }
+  .tl-role {
+    @apply rounded-full bg-cyan-400/10 px-2.5 py-0.5 text-[13px] font-semibold text-cyan-300;
+  }
+  .tl-period { @apply ml-auto text-[12.5px] text-mute; }
+  .tl-loc { @apply flex items-center gap-1 text-[12.5px] text-mute; }
+  .tl-loc svg { @apply h-[13px] w-[13px]; }
+  .tl-points { @apply mt-3 grid gap-2; }
+  .tl-points li { @apply relative pl-[18px] text-sm text-soft; }
+  .tl-points li::before {
+    content: ""; position: absolute; left: 2px; top: .68em; width: 7px; height: 7px;
+    border-radius: 2px; background: #22d3ee; transform: rotate(45deg);
+  }
 
-        /* ===== Back to top ===== */
-        .back-top {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #67e8f9;
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(16px);
-            transition: all 280ms;
-            z-index: 900;
-            cursor: pointer;
-        }
-        .back-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-        .back-top:hover {
-            border-color: rgba(34, 211, 238, 0.5);
-            box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.2), 0 12px 36px rgba(34, 211, 238, 0.3);
-            transform: translateY(-3px);
-        }
+  /* ---------- 项目卡片 ---------- */
+  .project-grid { @apply grid grid-cols-2 gap-[18px]; }
+  .project-card { @apply flex flex-col gap-3 p-6; }
+  .pj-head { @apply flex items-start gap-2.5; }
+  .pj-name { @apply text-[17.5px] font-extrabold leading-snug text-ink; }
+  .pj-cat {
+    @apply ml-auto shrink-0 rounded-full border border-indigo-400/25 bg-indigo-400/10
+           px-2.5 py-[3px] text-[11.5px] font-bold text-indigo-300;
+  }
+  .pj-kind { @apply -mt-1.5 text-[12.5px] text-mute; }
+  .pj-row { @apply text-[13.5px] text-soft; }
+  .pj-row b {
+    @apply mr-2 inline-block rounded-md bg-cyan-400/10 px-2 py-[1px]
+           text-[11.5px] font-bold text-cyan-300;
+    vertical-align: 1px;
+  }
+  .pj-row ul { @apply mt-1 grid gap-[5px]; }
+  .pj-row li { @apply relative pl-[14px]; }
+  .pj-row li::before { content: "▸"; position: absolute; left: 0; color: #818cf8; font-size: 12px; }
+  .pj-tags { @apply mt-0.5 flex flex-wrap gap-1.5; }
+  .pj-foot { @apply mt-auto flex items-center border-t border-dashed border-line/10 pt-2.5; }
+  .pj-link { @apply inline-flex items-center gap-1.5 text-[13.5px] font-bold text-cyan-300 transition-all duration-200; }
+  .pj-link:hover { gap: 10px; }
+  .pj-link svg { @apply h-3.5 w-3.5; }
+  .pj-empty { @apply col-span-full p-10 text-center text-sm text-mute; }
 
-        /* ===== Fade in ===== */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-hidden { opacity: 0; transform: translateY(12px); transition: opacity 400ms, transform 400ms; }
-        .fade-visible { opacity: 1; transform: translateY(0); }
-        .fade-in-anim { animation: fadeUp 300ms ease-out forwards; }
+  /* ---------- 技能矩阵 ---------- */
+  .skill-grid { @apply grid grid-cols-2 gap-[18px]; }
+  .skill-group { @apply p-6; }
+  .skill-group h3 { @apply mb-4 flex items-center gap-2 text-[15.5px] font-extrabold text-ink; }
+  .skill-group h3 svg { @apply h-[18px] w-[18px] text-cyan-400; }
+  .skill-list { @apply grid gap-3.5; }
+  .skill-name { @apply flex items-baseline justify-between gap-2.5 text-[13.8px] font-semibold text-ink; }
+  .skill-pct { @apply text-xs font-bold text-cyan-300; font-variant-numeric: tabular-nums; }
+  .skill-note { @apply mt-0.5 text-xs text-mute; }
+  .bar { @apply mt-[7px] h-2 overflow-hidden rounded-full bg-white/[.07]; }
+  .bar-fill {
+    width: 0; height: 100%; border-radius: 999px;
+    background-image: linear-gradient(90deg, #22d3ee, #818cf8);
+    box-shadow: 0 0 12px -2px rgba(34, 211, 238, .6);
+    transition: width .9s cubic-bezier(.22,.61,.36,1);
+  }
+  .in .bar-fill { width: var(--w, 0); }
+  .skill-badges { @apply mt-3.5 flex flex-wrap gap-[7px]; }
 
-        /* ===== Scrollbar ===== */
-        ::-webkit-scrollbar { width: 8px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(99, 102, 241, 0.35);
-            border-radius: 9999px;
-        }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(34, 211, 238, 0.55); }
+  /* ---------- 教育与证书 ---------- */
+  .edu-grid { @apply grid gap-[18px]; grid-template-columns: 1.5fr 1fr; }
+  .edu-card { @apply flex gap-[18px] p-[26px]; }
+  .edu-icon {
+    @apply grid h-12 w-12 shrink-0 place-items-center rounded-[14px] text-white;
+    background-image: linear-gradient(135deg, #06b6d4, #6366f1);
+    box-shadow: 0 10px 22px -8px rgba(34, 211, 238, .6);
+  }
+  .edu-icon svg { @apply h-6 w-6; }
+  .edu-school { @apply text-[17px] font-extrabold text-ink; }
+  .edu-degree { @apply mt-0.5 text-[13.5px] font-semibold text-cyan-300; }
+  .edu-meta { @apply mt-[7px] flex flex-wrap gap-x-4 gap-y-1.5 text-[12.5px] text-mute; }
+  .edu-meta svg { @apply inline h-[13px] w-[13px]; }
+  .courses { @apply mt-3.5 border-t border-dashed border-line/10 pt-3.5; }
+  .courses h4 { @apply mb-2 text-[12.5px] font-bold tracking-[1px] text-mute; }
+  .course-tags { @apply flex flex-wrap gap-1.5; }
+  .cert-card { @apply p-[26px]; }
+  .cert-card.wide { grid-column: 1 / -1; }
+  .cert-card h3 { @apply mb-3.5 flex items-center gap-2 text-[15.5px] font-extrabold text-ink; }
+  .cert-card h3 svg { @apply h-[18px] w-[18px] text-cyan-400; }
+  .cert-summary { @apply mb-3.5 flex items-center gap-2 text-[13px] text-soft; }
+  .cert-summary svg { @apply h-4 w-4 shrink-0 text-cyan-400; }
+  .cert-list li { @apply flex items-start gap-2.5 border-b border-dashed border-line/10 py-[11px] text-[13.8px]; }
+  .cert-list li:last-child { border-bottom: none; }
+  .cert-list svg { @apply mt-[3px] h-[17px] w-[17px] shrink-0 text-cyan-400; }
 
-        /* ===== Reduced motion ===== */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-            }
-            html { scroll-behavior: auto; }
-        }
+  /* 证书画廊 */
+  .cert-gallery { @apply grid grid-cols-4 gap-3; }
+  .cert-thumb {
+    @apply block w-full cursor-zoom-in rounded-[10px] border border-line/10 bg-white/[.04] p-0;
+    height: 190px; object-fit: cover; object-position: top center;
+    transition: transform .2s cubic-bezier(.22,.61,.36,1), box-shadow .2s ease, border-color .2s ease;
+  }
+  .cert-thumb:hover { transform: translateY(-3px); border-color: rgba(34, 211, 238, .45); box-shadow: 0 18px 40px -18px rgba(34, 211, 238, .4); }
 
-        /* ===== Print ===== */
-        @media print {
-            .glow-blob, .navbar, .back-top, .hero-actions, .toast { display: none !important; }
-            body { background: #fff; color: #1a1d27; }
-            .glass, .glass-strong { background: #fff !important; border: 1px solid #ccc !important; backdrop-filter: none !important; }
-            .text-gradient, .text-gradient-num { -webkit-text-fill-color: #1a1d27 !important; }
-            .pill-cyan { background: #f0f0f0 !important; color: #333 !important; border-color: #ccc !important; }
-        }
-    </style>
+  /* ---------- 页脚 / 返回顶部 / Toast ---------- */
+  .footer {
+    @apply relative z-[1] mt-[30px] border-t border-line/10 py-[34px];
+    background: rgb(var(--c-surface) / .35);
+  }
+  .footer-inner { @apply flex flex-wrap items-center justify-between gap-x-5 gap-y-2.5 text-[13px] text-mute; }
+  .footer .heart { color: #f472b6; }
+  .footer-links { @apply flex gap-3.5; }
+  .footer-links a { transition: color .18s; }
+  .footer-links a:hover { color: #67e8f9; }
+  .back-top {
+    @apply fixed z-[90] grid h-[46px] w-[46px] place-items-center rounded-full text-white;
+    right: 26px; bottom: 26px;
+    background-image: linear-gradient(135deg, #06b6d4, #6366f1);
+    box-shadow: 0 12px 28px -8px rgba(34, 211, 238, .7);
+    opacity: 0; transform: translateY(14px) scale(.9); pointer-events: none;
+    transition: all .22s cubic-bezier(.22,.61,.36,1);
+  }
+  .back-top.show { opacity: 1; transform: none; pointer-events: auto; }
+  .back-top:hover { transform: translateY(-3px); }
+  .back-top svg { @apply h-5 w-5; }
+  .toast {
+    @apply fixed z-[200] rounded-full border border-white/10 px-5 py-2.5 text-[13.5px] font-semibold;
+    left: 50%; bottom: 30px;
+    background: rgba(15, 23, 42, .88); color: #e2e8f0;
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    box-shadow: 0 24px 60px -18px rgba(0, 0, 0, .7);
+    max-width: calc(100vw - 40px); text-align: center;
+    opacity: 0; transform: translate(-50%, 16px); pointer-events: none;
+    transition: all .22s cubic-bezier(.22,.61,.36,1);
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  /* ---------- 灯箱 ---------- */
+  .lightbox {
+    @apply fixed inset-0 z-[300] grid place-items-center p-[5vmin];
+    background: rgba(3, 7, 18, .82);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    animation: lbIn .2s ease;
+  }
+  .lightbox[hidden] { display: none; }
+  .lightbox img {
+    max-width: min(92vw, 760px); max-height: 88vh; border-radius: 12px;
+    background: #fff; box-shadow: 0 30px 80px -20px rgba(0, 0, 0, .85);
+    animation: lbZoom .22s cubic-bezier(.22,.61,.36,1);
+  }
+  .lb-close {
+    @apply absolute grid h-[42px] w-[42px] place-items-center rounded-full border text-white;
+    top: 22px; right: 26px;
+    background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .28);
+    transition: background .18s ease;
+  }
+  .lb-close:hover { background: rgba(255, 255, 255, .26); }
+  .lb-close svg { @apply h-5 w-5; }
+  .lb-hint { @apply absolute inset-x-0 bottom-5 text-center text-[12.5px]; color: rgba(226, 232, 240, .7); }
+}
+
+/* ============================================================
+   背景发光光斑（左上 Cyan / 右下 Indigo）
+   ============================================================ */
+.deco { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.blob { position: absolute; border-radius: 50%; filter: blur(140px); opacity: var(--blob-op); will-change: opacity; }
+.blob-a {
+  width: 560px; height: 560px; top: -180px; left: -160px;
+  background: radial-gradient(circle, rgba(34, 211, 238, .9), transparent 68%);
+}
+.blob-b {
+  width: 620px; height: 620px; bottom: -240px; right: -180px;
+  background: radial-gradient(circle, rgba(129, 140, 248, .9), transparent 68%);
+}
+main { position: relative; z-index: 1; }
+
+@keyframes panelIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes lbIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lbZoom { from { transform: scale(.94); opacity: .4; } to { transform: none; opacity: 1; } }
+
+/* 进入动效 */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .55s cubic-bezier(.22,.61,.36,1), transform .55s cubic-bezier(.22,.61,.36,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* 指标看板 hover：柔和青色微发光 + 上浮（未分层以覆盖 .reveal.in 的 transform） */
+.stat.reveal.in { transition: box-shadow .3s ease, transform .3s ease, border-color .3s ease; }
+.stat.reveal.in:hover {
+  transform: translateY(-4px);
+  border-color: rgba(34, 211, 238, .22);
+  box-shadow: 0 20px 44px -18px rgba(34, 211, 238, .42), 0 0 0 1px rgba(34, 211, 238, .12);
+}
+[data-theme="light"] .stat.reveal.in:hover {
+  border-color: rgba(8, 145, 178, .25);
+  box-shadow: 0 20px 44px -22px rgba(8, 145, 178, .35), 0 12px 34px -22px rgba(15, 23, 42, .18);
+}
+
+/* ============================================================
+   浅色模式（屏幕）视觉修正
+   ============================================================ */
+[data-theme="light"] {
+  --blob-op: .08;
+}
+[data-theme="light"] .card { box-shadow: 0 12px 34px -22px rgba(15, 23, 42, .25); }
+[data-theme="light"] .card:hover { box-shadow: 0 26px 54px -24px rgba(8, 145, 178, .25), 0 12px 34px -22px rgba(15,23,42,.2); }
+[data-theme="light"] .badge { color: #0e7490; border-color: rgba(8, 145, 178, .28); background: rgba(8, 145, 178, .08); }
+[data-theme="light"] .badge.ghost { color: #475569; border-color: rgba(15, 23, 42, .12); background: rgba(15, 23, 42, .04); }
+[data-theme="light"] .badge.violet { color: #4f46e5; border-color: rgba(79, 70, 229, .28); background: rgba(79, 70, 229, .08); }
+[data-theme="light"] .hero-eyebrow { color: #0e7490; border-color: rgba(8, 145, 178, .25); background: rgba(8, 145, 178, .08); }
+[data-theme="light"] .head-icon { color: #0e7490; border-color: rgba(8, 145, 178, .25); background: rgba(8, 145, 178, .08); }
+[data-theme="light"] .section-index { color: #0891b2; }
+[data-theme="light"] .grad,
+[data-theme="light"] .stat-value,
+[data-theme="light"] .section-head h2 em {
+  background-image: linear-gradient(120deg, #0891b2 0%, #0284c7 45%, #4f46e5 100%);
+  -webkit-background-clip: text; background-clip: text;
+}
+[data-theme="light"] .nav-links a:hover,
+[data-theme="light"] .nav-links a.active { color: #0e7490; background: rgba(8, 145, 178, .1); }
+[data-theme="light"] .icon-btn:hover { color: #0e7490; border-color: rgba(8, 145, 178, .4); }
+[data-theme="light"] .btn-ghost:hover { color: #0e7490; border-color: rgba(8, 145, 178, .45); box-shadow: 0 10px 26px -14px rgba(8, 145, 178, .4); }
+[data-theme="light"] .tab { color: #64748b; }
+[data-theme="light"] .tab:hover { color: #0e7490; }
+[data-theme="light"] .tl-role,
+[data-theme="light"] .pj-row b,
+[data-theme="light"] .pj-link,
+[data-theme="light"] .skill-pct,
+[data-theme="light"] .edu-degree { color: #0e7490; }
+[data-theme="light"] .tl-role,
+[data-theme="light"] .pj-row b { background: rgba(8, 145, 178, .09); }
+[data-theme="light"] .pj-cat { color: #4f46e5; border-color: rgba(79, 70, 229, .25); background: rgba(79, 70, 229, .08); }
+[data-theme="light"] .meta-item svg,
+[data-theme="light"] .skill-group h3 svg,
+[data-theme="light"] .cert-card h3 svg,
+[data-theme="light"] .cert-summary svg,
+[data-theme="light"] .cert-list svg { color: #0891b2; }
+[data-theme="light"] .avatar { border-color: #fff; box-shadow: 0 0 0 3px rgba(8, 145, 178, .35), 0 14px 34px -12px rgba(8, 145, 178, .45); }
+[data-theme="light"] .tl-item::before { border-color: #fff; }
+[data-theme="light"] .bar { background: rgba(15, 23, 42, .08); }
+[data-theme="light"] .cert-thumb { background: rgba(15, 23, 42, .03); }
+[data-theme="light"] .footer-links a:hover { color: #0e7490; }
+
+/* ============================================================
+   响应式
+   ============================================================ */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+  .profile-card { max-width: 440px; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .project-grid, .skill-grid, .edu-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .container { width: calc(100% - 32px); }
+  section { padding: 44px 0; }
+  .nav-links { display: none; }
+  .print-label { display: inline; }
+  .hero { padding-top: calc(64px + 36px); }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .stat { padding: 18px 16px; }
+  .tl-item, .project-card, .skill-group { padding: 20px 18px; }
+  .tl-period { margin-left: 0; }
+  .cert-gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .cert-thumb { height: 170px; }
+  .back-top { right: 16px; bottom: 18px; }
+}
+
+/* 减弱动效偏好 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+  .bar-fill { width: var(--w, 0) !important; }
+}
+
+/* ============================================================
+   打印样式（导出 PDF：强制浅色纸面）
+   ============================================================ */
+@media print {
+  @page { margin: 12mm 11mm; }
+  :root, [data-theme="dark"], [data-theme="light"] {
+    color-scheme: light;
+    --c-bg: 255 255 255; --c-surface: 255 255 255; --c-elevated: 255 255 255;
+    --c-line: 204 204 204; --c-ink: 17 17 17; --c-soft: 51 51 51; --c-mute: 85 85 85;
+  }
+  html, body { background: #fff !important; color: #222; font-size: 12.5px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .deco, .nav, .back-top, .toast, .lightbox, .lb-hint, .hero-eyebrow, .head-icon { display: none !important; }
+  .container { width: 100%; }
+  main { position: static; }
+  section { padding: 14px 0 !important; page-break-inside: auto; }
+  .hero { padding-top: 0 !important; }
+  .hero-grid { grid-template-columns: 1fr; gap: 16px; }
+  .hero h1 { font-size: 34px; }
+  .profile-card { max-width: none; display: grid; grid-template-columns: 70px 1fr; align-items: center;
+    column-gap: 14px; padding: 14px 0; border: none; background: #fff !important; box-shadow: none !important; }
+  .profile-card::before { display: none; }
+  .profile-card > * { position: static; }
+  .avatar { width: 64px; height: 64px; margin: 0; border-color: #fff; box-shadow: none; }
+  .profile-name, .profile-sub { text-align: left; }
+  .meta-list { grid-column: 1 / -1; margin-top: 12px; grid-template-columns: repeat(3, 1fr); }
+  .cta-row { gap: 6px; margin-top: 14px; }
+  .cta-row .btn { padding: 4px 10px; font-size: 11.5px; border: 1px solid #bbb; border-radius: 6px;
+    box-shadow: none; background: #fff !important; color: #222 !important; }
+  .cta-row .btn svg { display: none; }
+  .cta-row a[href^="mailto"]::after { content: "（" attr(data-email) "）"; }
+  .cta-row .copy::after { content: " " attr(data-copy); }
+  .stat-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .card, .stat, .tl-item, .project-card, .skill-group, .edu-card, .cert-card {
+    background: #fff !important; box-shadow: none !important; backdrop-filter: none !important;
+    border: 1px solid #ccc !important; break-inside: avoid; padding: 12px; transform: none !important;
+  }
+  .stat::after { display: none; }
+  .grad, .hero h1 .grad, .stat-value, .section-head h2 em {
+    -webkit-text-fill-color: #0e7490 !important; color: #0e7490 !important;
+    background-image: none !important;
+  }
+  .tablist { display: none !important; }
+  .tab-panel { display: block !important; animation: none; }
+  [role="tabpanel"][hidden] { display: block !important; }
+  .timeline { gap: 10px; padding-left: 18px; }
+  .timeline::before { display: none; }
+  .tl-item::before { left: -23px; top: 18px; border-color: #fff; }
+  .project-grid, .skill-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .edu-grid { grid-template-columns: 1.4fr 1fr; gap: 10px; }
+  .badge, .pj-cat, .tl-role, .pj-row b {
+    border: 1px solid #bbb !important; background: #fff !important; color: #333 !important; box-shadow: none !important;
+  }
+  .cert-card.wide { grid-column: 1 / -1; }
+  .cert-gallery { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .cert-thumb { height: 110px; border-radius: 4px; transform: none !important; box-shadow: none !important; }
+  .bar { background: #e5e7eb; }
+  .bar-fill { box-shadow: none; }
+  .footer { margin-top: 14px; padding: 14px 0; background: #fff; }
+  a { color: #111 !important; }
+}
+</style>
 </head>
-<body class="font-sans">
+<body>
 
-    <!-- Background glow blobs -->
-    <div class="glow-blob glow-cyan" aria-hidden="true"></div>
-    <div class="glow-blob glow-indigo" aria-hidden="true"></div>
+<div class="deco" aria-hidden="true"><span class="blob blob-a"></span><span class="blob blob-b"></span></div>
 
-    <!-- ===== Navigation ===== -->
-    <nav class="fixed top-0 left-0 right-0 z-50 h-16 border-b border-white/5" style="background: rgba(3, 7, 18, 0.72); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);" role="navigation" aria-label="主导航">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between gap-4">
-            <div class="flex items-center gap-2 font-extrabold text-base tracking-tight text-white">
-                <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg" style="background: linear-gradient(135deg, #22d3ee, #6366f1);">
-                    <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
-                </span>
-                <span>李欣兰</span>
-                <span class="text-slate-500 font-normal">·</span>
-                <span class="text-gradient">简历</span>
-            </div>
-            <div class="hidden md:flex items-center gap-1" role="tablist" aria-label="页面导航" id="navLinks">
-                <a href="#hero" class="px-3 py-1.5 text-[13px] font-medium text-slate-400 rounded-full hover:text-white hover:bg-white/5 transition" role="tab" aria-selected="false">首页</a>
-                <a href="#highlights" class="px-3 py-1.5 text-[13px] font-medium text-slate-400 rounded-full hover:text-white hover:bg-white/5 transition" role="tab" aria-selected="false">亮点</a>
-                <a href="#experience" class="px-3 py-1.5 text-[13px] font-medium text-slate-400 rounded-full hover:text-white hover:bg-white/5 transition" role="tab" aria-selected="false" id="nav-exp-link">经历</a>
-                <a href="#projects" class="px-3 py-1.5 text-[13px] font-medium text-slate-400 rounded-full hover:text-white hover:bg-white/5 transition" role="tab" aria-selected="false" id="nav-proj-link">项目</a>
-                <a href="#skills" class="px-3 py-1.5 text-[13px] font-medium text-slate-400 rounded-full hover:text-white hover:bg-white/5 transition" role="tab" aria-selected="false">技能</a>
-                <a href="#education" class="px-3 py-1.5 text-[13px] font-medium text-slate-400 rounded-full hover:text-white hover:bg-white/5 transition" role="tab" aria-selected="false">教育</a>
-            </div>
-            <div class="flex items-center gap-2">
-                <a href="https://github.com/Lixl08" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-white/10 text-slate-400 hover:text-cyan-300 hover:border-cyan-400/50 transition" aria-label="GitHub" title="GitHub">
-                    <i data-lucide="github" class="w-4 h-4"></i>
-                </a>
-                <button id="printBtn" class="inline-flex items-center justify-center w-9 h-9 rounded-full border border-white/10 text-slate-400 hover:text-cyan-300 hover:border-cyan-400/50 transition" aria-label="打印简历" title="打印 / 导出PDF">
-                    <i data-lucide="printer" class="w-4 h-4"></i>
-                </button>
-            </div>
-        </div>
+<!-- ================= 导航栏 ================= -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#hero" aria-label="返回顶部">
+      <span class="brand-mark">李</span>
+      <span>李欣兰<small>LI XINLAN · RESUME</small></span>
+    </a>
+    <nav class="nav-links" aria-label="页面导航">
+      <a href="#highlights">亮点</a>
+      <a href="#experience">经历</a>
+      <a href="#projects">项目</a>
+      <a href="#skills">技能</a>
+      <a href="#education">教育</a>
     </nav>
-
-    <!-- ===== Main ===== -->
-    <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-24" id="mainContent">
-
-        <!-- ===== Hero ===== -->
-        <section class="flex flex-col items-center text-center pt-8 pb-12 scroll-mt-24" id="hero" aria-label="个人简介">
-            <div class="relative mb-6">
-                <div class="absolute -inset-3 rounded-full opacity-60" style="background: linear-gradient(135deg, rgba(34, 211, 238, 0.45), rgba(99, 102, 241, 0.45)); filter: blur(22px);"></div>
-                <div class="relative w-28 h-28 rounded-full overflow-hidden border-2 border-white/15" style="box-shadow: 0 0 0 4px rgba(3, 7, 18, 0.6), 0 18px 40px -10px rgba(34, 211, 238, 0.4);">
-                    <img src="logo.jpg" alt="李欣兰头像" class="w-full h-full object-cover">
-                </div>
-            </div>
-            <div class="inline-flex items-center gap-1.5 px-3 py-1 mb-4 rounded-full text-[11px] font-semibold text-cyan-300 border border-cyan-400/25" style="background: rgba(34, 211, 238, 0.08);">
-                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
-                可联系 · 福建福州
-            </div>
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight mb-3">李欣兰</h1>
-            <p class="text-cyan-400 font-medium text-base sm:text-lg mb-5">计算机科学与技术 · 本科在读</p>
-            <p class="max-w-2xl text-slate-300/90 text-[15px] leading-relaxed mb-6" id="heroSummary"></p>
-            <div class="flex flex-wrap gap-2 justify-center mb-7" id="heroBadges"></div>
-            <div class="flex flex-wrap gap-3 justify-center" id="heroActions"></div>
-        </section>
-
-        <!-- ===== Highlights ===== -->
-        <section class="mb-14 scroll-mt-24" id="highlights" aria-label="亮点成果">
-            <div class="flex items-end justify-between mb-6 gap-4">
-                <div>
-                    <div class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-cyan-400 mb-2 tracking-wider uppercase">
-                        <i data-lucide="zap" class="w-3.5 h-3.5"></i>
-                        Highlights
-                    </div>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">亮点战绩</h2>
-                    <div class="h-1 w-12 mt-3 rounded-full" style="background: linear-gradient(90deg, #22d3ee, #6366f1);"></div>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="highlightsGrid"></div>
-        </section>
-
-        <!-- ===== Experience (Tabs) ===== -->
-        <section class="mb-14 scroll-mt-24 hidden" id="experience" aria-label="经历">
-            <div class="mb-6">
-                <div class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-cyan-400 mb-2 tracking-wider uppercase">
-                    <i data-lucide="briefcase" class="w-3.5 h-3.5"></i>
-                    Experience
-                </div>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">经历</h2>
-                <div class="h-1 w-12 mt-3 rounded-full" style="background: linear-gradient(90deg, #22d3ee, #6366f1);"></div>
-            </div>
-            <div class="glass-strong overflow-hidden" id="experienceTabsContainer"></div>
-        </section>
-
-        <!-- ===== Projects (Tabs) ===== -->
-        <section class="mb-14 scroll-mt-24 hidden" id="projects" aria-label="项目">
-            <div class="mb-6">
-                <div class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-cyan-400 mb-2 tracking-wider uppercase">
-                    <i data-lucide="folder-git-2" class="w-3.5 h-3.5"></i>
-                    Projects
-                </div>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">项目</h2>
-                <div class="h-1 w-12 mt-3 rounded-full" style="background: linear-gradient(90deg, #22d3ee, #6366f1);"></div>
-            </div>
-            <div class="glass-strong overflow-hidden" id="projectsTabsContainer"></div>
-        </section>
-
-        <!-- ===== Skills ===== -->
-        <section class="mb-14 scroll-mt-24" id="skills" aria-label="技能">
-            <div class="mb-6">
-                <div class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-cyan-400 mb-2 tracking-wider uppercase">
-                    <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
-                    Skills
-                </div>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">技能矩阵</h2>
-                <div class="h-1 w-12 mt-3 rounded-full" style="background: linear-gradient(90deg, #22d3ee, #6366f1);"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="skillsGrid"></div>
-        </section>
-
-        <!-- ===== Education & Certificates ===== -->
-        <section class="mb-14 scroll-mt-24" id="education" aria-label="教育与证书">
-            <div class="mb-6">
-                <div class="inline-flex items-center gap-1.5 text-[11px] font-semibold text-cyan-400 mb-2 tracking-wider uppercase">
-                    <i data-lucide="graduation-cap" class="w-3.5 h-3.5"></i>
-                    Education &amp; Certificates
-                </div>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">教育与证书</h2>
-                <div class="h-1 w-12 mt-3 rounded-full" style="background: linear-gradient(90deg, #22d3ee, #6366f1);"></div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="eduCertGrid"></div>
-        </section>
-
-    </main>
-
-    <!-- ===== Footer ===== -->
-    <footer class="relative z-10 border-t border-white/5 py-6 text-center text-[12.5px] text-slate-500">
-        <p>© 2026 李欣兰 · 个人简历 &nbsp;|&nbsp; 最后更新:2026年8月 &nbsp;|&nbsp; <a href="#hero" id="footerTopLink" class="text-slate-400 hover:text-cyan-300 transition inline-flex items-center gap-1"><i data-lucide="arrow-up" class="w-3 h-3"></i>返回顶部</a></p>
-    </footer>
-
-    <!-- Back to top -->
-    <button class="back-top" id="backToTop" aria-label="返回顶部" title="返回顶部">
-        <i data-lucide="arrow-up" class="w-5 h-5"></i>
-    </button>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片预览">
-        <button class="absolute top-6 right-8 text-white/70 hover:text-white transition" id="lightboxClose" aria-label="关闭预览">
-            <i data-lucide="x" class="w-8 h-8"></i>
-        </button>
-        <img id="lightboxImg" src="" alt="证书大图" class="max-w-[92vw] max-h-[88vh]">
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="切换浅色 / 深色模式" title="切换主题">
+        <span class="icon-sun"><i data-lucide="sun"></i></span>
+        <span class="icon-moon"><i data-lucide="moon"></i></span>
+      </button>
+      <button class="icon-btn" id="printBtn" type="button" aria-label="打印或导出 PDF" title="打印 / 导出 PDF">
+        <i data-lucide="printer"></i><span class="print-label">打印</span>
+      </button>
     </div>
+  </div>
+</header>
 
-    <!-- Toast -->
-    <div class="toast" id="toast" role="status" aria-live="polite">
-        <div class="glass-strong flex items-center gap-2.5 px-4 py-3 shadow-2xl" style="border-color: rgba(34, 211, 238, 0.3);">
-            <i data-lucide="check-circle-2" class="w-4 h-4 text-cyan-400"></i>
-            <span class="text-[13px] font-medium text-slate-200" id="toastText">邮箱已复制到剪贴板</span>
+<main>
+  <!-- ================= Hero ================= -->
+  <section class="hero" id="hero"><div class="container"><div id="heroMount"></div></div></section>
+
+  <!-- ================= 亮点成果 ================= -->
+  <section id="highlights"><div class="container">
+    <div class="section-head reveal">
+      <div class="head-row">
+        <span class="head-icon"><i data-lucide="trophy"></i></span>
+        <div>
+          <div class="section-index mono">01 / HIGHLIGHTS</div>
+          <h2>亮点<em>成果</em></h2>
         </div>
+      </div>
+      <p>用数字说话：效率提升、工具熟练度与从 0 到 1 的交付能力</p>
     </div>
+    <div id="highlightMount" class="stat-grid"></div>
+  </div></section>
 
-    <script>
-        (function() {
-            'use strict';
+  <!-- ================= 经历 Tabs ================= -->
+  <section id="experience"><div class="container">
+    <div class="section-head reveal">
+      <div class="head-row">
+        <span class="head-icon"><i data-lucide="briefcase"></i></span>
+        <div>
+          <div class="section-index mono">02 / EXPERIENCE</div>
+          <h2>学习与<em>实践经历</em></h2>
+        </div>
+      </div>
+      <p>校园学习、AI 效率实践与内容创作开发三条线并行推进（← → 键可切换标签）</p>
+    </div>
+    <div id="expMount" class="reveal"></div>
+  </div></section>
 
-            /* ===== Resume Data (个人资料完整保留) ===== */
-            const resume = {
-                name: '李欣兰',
-                title: '计算机科学与技术 本科在读',
-                summary: '计算机科学与技术专业在读,专注于多媒体表达与视觉化呈现。精通 PowerPoint 演示制作与视频剪辑,持有阿里云 Apsara Clouder 多项技能认证,致力于用技术提升信息传递效率。',
-                contact: {
-                    phone: '19895551087',
-                    emailUser: '2180079343',
-                    emailDomain: 'qq.com',
-                    location: '福建福州',
-                    github: 'github.com/Lixl08',
-                    githubUrl: 'https://github.com/Lixl08',
-                    portfolio: null
-                },
-                badges: [
-                    'PowerPoint 视觉化表达',
-                    'Premiere Pro / 剪映',
-                    '阿里云认证',
-                    '计算机科学在读',
-                    '视频剪辑与特效'
-                ],
-                highlights: [{
-                    icon: 'cloud',
-                    stat: '08+',
-                    label: '云技能认证',
-                    title: '阿里云 Apsara Clouder 认证系列',
-                    desc: '获得多项云技能专项认证,覆盖云计算核心领域,展现快速学习与技术应用能力。',
-                    images: ['p1.png', 'p2.png', 'p3.png', 'p4.png', 'p5.png', 'p6.png', 'p7.png', 'p8.png']
-                }, {
-                    icon: 'presentation',
-                    stat: '90',
-                    label: '熟练度 %',
-                    title: 'PowerPoint 视觉化表达',
-                    desc: '精通动画、图表与逻辑框架设计,显著提升演示信息传递效率与专业呈现力。'
-                }, {
-                    icon: 'clapperboard',
-                    stat: '全流程',
-                    label: '产出能力',
-                    title: '视频全流程制作',
-                    desc: '熟练使用 Premiere Pro / 剪映完成剪辑、字幕包装与基础特效合成,具备完整视频产出能力。'
-                }, {
-                    icon: 'binary',
-                    stat: '6门',
-                    label: '核心课程',
-                    title: '计算机科学核心课程',
-                    desc: '系统学习数据结构、算法、操作系统、计算机网络等核心课程,打下扎实技术基础。'
-                }],
-                experience: {
-                    work: [],
-                    internship: [],
-                    campus: []
-                },
-                projects: [],
-                skills: [{
-                    category: '办公与多媒体工具',
-                    icon: 'palette',
-                    items: [
-                        { name: 'PowerPoint', level: 90, highlight: true },
-                        { name: 'Premiere Pro', level: 75, highlight: true },
-                        { name: '剪映专业版', level: 80, highlight: true },
-                        { name: '演示动画设计', level: 85 },
-                        { name: '视觉化表达', level: 88 },
-                        { name: '字幕包装', level: 72 }
-                    ]
-                }, {
-                    category: '计算机专业技能',
-                    icon: 'terminal',
-                    items: [
-                        { name: '数据结构与算法', level: 40, learning: true },
-                        { name: '数据库原理', level: 35, learning: true },
-                        { name: '操作系统', level: 30, learning: true },
-                        { name: '计算机网络', level: 35, learning: true },
-                        { name: '软件工程', level: 30, learning: true }
-                    ]
-                }],
-                education: {
-                    school: '江苏理工学院',
-                    degree: '本科',
-                    major: '计算机科学与技术',
-                    period: '2026.09 – 2030.09',
-                    gpa: null,
-                    courses: ['数据结构与算法', '数据库系统原理', '操作系统', '计算机网络', '软件工程', '人工智能导论'],
-                    honors: []
-                },
-                certificates: [
-                    '阿里云 Apsara Clouder 专项技能认证系列证书'
-                ]
-            };
+  <!-- ================= 项目 Tabs ================= -->
+  <section id="projects"><div class="container">
+    <div class="section-head reveal">
+      <div class="head-row">
+        <span class="head-icon"><i data-lucide="rocket"></i></span>
+        <div>
+          <div class="section-index mono">03 / PROJECTS</div>
+          <h2>精选<em>项目</em></h2>
+        </div>
+      </div>
+      <p>AIGC 内容生产、个人知识管理与 Vibe Coding 开发实践</p>
+    </div>
+    <div id="projectMount" class="reveal"></div>
+  </div></section>
 
-            /* ===== DOM ===== */
-            const printBtn = document.getElementById('printBtn');
-            const backToTop = document.getElementById('backToTop');
-            const footerTopLink = document.getElementById('footerTopLink');
-            const navLinks = document.querySelectorAll('#navLinks a');
-            const navExpLink = document.getElementById('nav-exp-link');
-            const navProjLink = document.getElementById('nav-proj-link');
-            const heroSummary = document.getElementById('heroSummary');
-            const heroBadges = document.getElementById('heroBadges');
-            const heroActions = document.getElementById('heroActions');
-            const highlightsGrid = document.getElementById('highlightsGrid');
-            const experienceSection = document.getElementById('experience');
-            const experienceTabsContainer = document.getElementById('experienceTabsContainer');
-            const projectsSection = document.getElementById('projects');
-            const projectsTabsContainer = document.getElementById('projectsTabsContainer');
-            const skillsGrid = document.getElementById('skillsGrid');
-            const eduCertGrid = document.getElementById('eduCertGrid');
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightboxImg');
-            const lightboxClose = document.getElementById('lightboxClose');
-            const toast = document.getElementById('toast');
-            const toastText = document.getElementById('toastText');
+  <!-- ================= 技能矩阵 ================= -->
+  <section id="skills"><div class="container">
+    <div class="section-head reveal">
+      <div class="head-row">
+        <span class="head-icon"><i data-lucide="cpu"></i></span>
+        <div>
+          <div class="section-index mono">04 / SKILLS</div>
+          <h2>技能<em>矩阵</em></h2>
+        </div>
+      </div>
+      <p>领域能力、语言基础、工具链与云计算，按实际项目熟练度自评</p>
+    </div>
+    <div id="skillMount" class="skill-grid"></div>
+  </div></section>
 
-            /* ===== Helpers ===== */
-            function getEmail() {
-                return resume.contact.emailUser + '@' + resume.contact.emailDomain;
-            }
-            function escapeHtml(str) {
-                const div = document.createElement('div');
-                div.textContent = str;
-                return div.innerHTML;
-            }
-            function lucideIcon(name, cls) {
-                return '<i data-lucide="' + escapeHtml(name) + '" class="' + (cls || '') + '"></i>';
-            }
-            function refreshIcons() {
-                if (window.lucide) window.lucide.createIcons();
-            }
+  <!-- ================= 教育与证书 ================= -->
+  <section id="education"><div class="container">
+    <div class="section-head reveal">
+      <div class="head-row">
+        <span class="head-icon"><i data-lucide="graduation-cap"></i></span>
+        <div>
+          <div class="section-index mono">05 / EDUCATION</div>
+          <h2>教育背景与<em>证书</em></h2>
+        </div>
+      </div>
+    </div>
+    <div id="eduMount" class="edu-grid"></div>
+  </div></section>
+</main>
 
-            function copyToClipboard(text) {
-                return new Promise(function(resolve, reject) {
-                    if (navigator.clipboard && navigator.clipboard.writeText) {
-                        navigator.clipboard.writeText(text).then(resolve).catch(function() {
-                            fallbackCopy(text, resolve, reject);
-                        });
-                    } else {
-                        fallbackCopy(text, resolve, reject);
-                    }
-                });
-            }
-            function fallbackCopy(text, resolve, reject) {
-                const ta = document.createElement('textarea');
-                ta.value = text;
-                ta.style.position = 'fixed';
-                ta.style.left = '-9999px';
-                document.body.appendChild(ta);
-                ta.select();
-                try {
-                    const ok = document.execCommand('copy');
-                    document.body.removeChild(ta);
-                    if (ok) resolve(); else reject(new Error('copy failed'));
-                } catch (e) {
-                    document.body.removeChild(ta);
-                    reject(e);
-                }
-            }
+<!-- ================= 页脚 ================= -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>© <span id="year">2026</span> 李欣兰 · 用 <span class="heart">♥</span> 与 Vibe Coding 构建 · 最后更新 <span id="updated">2026-09</span></div>
+    <div class="footer-links" id="footerLinks"></div>
+  </div>
+</footer>
 
-            /* ===== Toast ===== */
-            let toastTimer = null;
-            function showToast(text) {
-                toastText.textContent = text;
-                toast.classList.add('show');
-                if (toastTimer) clearTimeout(toastTimer);
-                toastTimer = setTimeout(function() {
-                    toast.classList.remove('show');
-                }, 2200);
-            }
+<button class="back-top" id="backTop" type="button" aria-label="返回顶部">
+  <i data-lucide="arrow-up"></i>
+</button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-            /* ===== Lightbox ===== */
-            function openLightbox(src) {
-                lightboxImg.src = src;
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-            function closeLightbox() {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = '';
-                lightboxImg.src = '';
-            }
-            lightboxClose.addEventListener('click', closeLightbox);
-            lightbox.addEventListener('click', function(e) {
-                if (e.target === lightbox) closeLightbox();
-            });
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
-            });
+<!-- 证书大图灯箱 -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="证书大图预览" hidden>
+  <button class="lb-close" id="lbClose" type="button" aria-label="关闭预览">
+    <i data-lucide="x"></i>
+  </button>
+  <img id="lightboxImg" alt="阿里云 Apsara Clouder 认证证书大图">
+  <div class="lb-hint">点击任意处或按 Esc 关闭</div>
+</div>
 
-            /* ===== Print ===== */
-            printBtn.addEventListener('click', function() { window.print(); });
+<!-- Lucide Icons -->
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 
-            /* ===== Back to top ===== */
-            function toggleBackToTop() {
-                if (window.scrollY > 400) backToTop.classList.add('visible');
-                else backToTop.classList.remove('visible');
-            }
-            backToTop.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-            footerTopLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-            window.addEventListener('scroll', toggleBackToTop, { passive: true });
-            toggleBackToTop();
+<script>
+/* ============================================================
+   简历数据（内容唯一数据源；缺失字段对应模块会自动隐藏）
+   ============================================================ */
+const resume = {
+  name: '李欣兰',
+  nameEn: 'LI XINLAN',
+  avatar: 'logo.jpg',
+  roles: ['计算机科学与技术本科生', 'AIGC 内容创作', 'Vibe Coding', '视频剪辑与后期'],
+  intro: '计算机科学与技术本科在读，热爱 AIGC 内容创作与 Vibe Coding：能用自然语言把想法变成可上线的网站与轻量互动应用，也能用剪映 / Premiere Pro 完成从脚本到成片的全流程视频制作。INTP，习惯用知识库与工作流把灵感沉淀为可复用的资产。',
+  keywords: ['AIGC 工具链', '提示词工程', 'Vibe Coding', 'HTML / CSS / JS', '视频剪辑与调色', 'GitHub Pages', '工作流搭建'],
+  contact: {
+    phone: '19895551087',
+    emailParts: ['2180079343', 'qq', 'com'],   // 运行时拼接，防爬虫
+    wechat: 'cc595592jj',
+    github: { label: 'github.com/lixl08', url: 'https://github.com/lixl08' }
+  },
+  meta: { status: '共青团员', hometown: '福建', mbti: 'INTP', hobbies: ['乒乓球', '羽毛球'] },
+  updated: '2026-09',
 
-            /* ===== Smooth scroll ===== */
-            navLinks.forEach(function(link) {
-                link.addEventListener('click', function(e) {
-                    const href = link.getAttribute('href');
-                    if (href && href.startsWith('#')) {
-                        const target = document.querySelector(href);
-                        if (target && !target.hasAttribute('hidden') && !target.classList.contains('hidden')) {
-                            e.preventDefault();
-                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        } else if (target) {
-                            e.preventDefault();
-                            const fallback = ['hero', 'highlights', 'skills', 'education'];
-                            const idx = fallback.indexOf(href.replace('#', ''));
-                            if (idx > -1) {
-                                const next = document.getElementById(fallback[idx]);
-                                if (next) next.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            }
-                        }
-                    }
-                });
-            });
+  highlights: [
+    { value: '↓ 50%', label: '资料查找耗时', desc: '个人知识库实现集中管理与语义检索' },
+    { value: '↑ 40%', label: '知识复用率', desc: '标签体系 + 搭建 SOP，资料快速调用' },
+    { value: '95% / 90%', label: '剪映 / PR 熟练度', desc: '独立完成短视频、宣传片、混剪包装' },
+    { value: '4+', label: '从 0 到 1 的项目', desc: '含上线 GitHub Pages 的可玩游戏与本站' }
+  ],
 
-            /* ===== Scroll spy ===== */
-            const allSections = document.querySelectorAll('section[id]');
-            const sectionObserver = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting && !entry.target.classList.contains('hidden')) {
-                        const id = entry.target.id;
-                        navLinks.forEach(function(link) {
-                            if (link.getAttribute('href') === '#' + id) {
-                                link.classList.add('text-white', 'bg-white/5');
-                                link.classList.remove('text-slate-400');
-                                link.setAttribute('aria-selected', 'true');
-                            } else {
-                                link.classList.remove('text-white', 'bg-white/5');
-                                link.classList.add('text-slate-400');
-                                link.setAttribute('aria-selected', 'false');
-                            }
-                        });
-                    }
-                });
-            }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
-            allSections.forEach(function(s) { sectionObserver.observe(s); });
+  education: {
+    school: '江苏理工学院',
+    degree: '本科 · 计算机科学与技术',
+    period: '2026.09 – 2030.09',
+    location: '江苏常州',
+    courses: ['程序设计', '数据结构', '算法设计与分析', '数据库原理', '计算机网络', '操作系统', '人工智能导论']
+  },
 
-            /* ===== Render Hero ===== */
-            function renderHero() {
-                heroSummary.textContent = resume.summary;
-                heroBadges.innerHTML = '';
-                resume.badges.forEach(function(b) {
-                    const span = document.createElement('span');
-                    span.className = 'pill-cyan';
-                    span.innerHTML = lucideIcon('sparkle', 'w-3 h-3') + '<span>' + escapeHtml(b) + '</span>';
-                    heroBadges.appendChild(span);
-                });
+  experience: [
+    {
+      key: 'campus', label: '校园学习',
+      items: [{
+        org: '江苏理工学院 · 计算机科学与技术', role: '本科在读',
+        period: '2026.09 – 2030.09', location: '江苏常州',
+        points: [
+          '系统学习程序设计、数据结构、算法设计与分析、数据库原理、计算机网络、操作系统、人工智能导论等核心课程。',
+          '共青团员；课余热爱乒乓球、羽毛球，在团队运动中保持节奏感与协作意识。'
+        ]
+      }]
+    },
+    {
+      key: 'ai', label: 'AI 与效率实践',
+      items: [
+        {
+          org: '个人知识库搭建 · Work Buddy × ima', role: '架构设计 / 持续运营',
+          period: '长期实践',
+          points: [
+            '设计分类目录、标签体系、问答入口与持续更新机制，导入课程笔记、项目文档与灵感记录。',
+            '沉淀知识库搭建 SOP 与标签规范，形成可迭代的“个人第二大脑”，支持后续项目快速调用。'
+          ]
+        },
+        {
+          org: 'AIGC 内容工作流', role: '提示词设计 / 工作流搭建',
+          period: '持续进行',
+          points: [
+            '熟练使用文本、图像、音频、视频生成工具，完成提示词设计、内容生成、工作流搭建与结果优化。',
+            '建立提示词模板库与配乐素材库，把 AI 嵌入学习、内容生产与项目开发全流程。'
+          ]
+        }
+      ]
+    },
+    {
+      key: 'create', label: '创作与开发实践',
+      items: [
+        {
+          org: '视频剪辑与后期', role: '剪辑 / 调色 / 节奏包装',
+          period: '作品向实践',
+          points: ['使用剪映（95%）与 Premiere Pro（90%）独立完成短视频、宣传片、混剪的字幕、转场、调色、音效与节奏包装。']
+        },
+        {
+          org: 'Vibe Coding 自然语言编程', role: '需求拆解 / 原型 / 部署',
+          period: '项目实战',
+          points: [
+            '通过自然语言完成需求拆解、原型设计、代码生成、调试与部署，熟悉 HTML / CSS / JavaScript 基础。',
+            '使用 Git / GitHub 与 GitHub Pages 独立上线静态网站与轻量互动应用，并完成项目路演与汇报材料制作。'
+          ]
+        }
+      ]
+    }
+  ],
 
-                heroActions.innerHTML = '';
+  projects: [
+    {
+      name: '新型坦克大战 Neo-Tank', cat: 'Vibe Coding',
+      kind: '游戏开发 · HTML5 Canvas 小游戏',
+      bg: '参考热门游戏“飞机大战”，验证自然语言编程在游戏原型开发中的可行性。',
+      actions: ['主导玩法设计、关卡逻辑、碰撞检测、敌人生成、得分系统与界面交互。', '借助 AI 辅助完成代码生成、调试、迭代与性能优化。'],
+      results: ['从 0 到 1 开发可在线试玩版本：键盘控制、实时碰撞、分数统计、游戏结束与重开。', '成功上线 GitHub Pages。'],
+      tags: ['HTML5 Canvas', 'JavaScript', '游戏设计', 'GitHub Pages'],
+      link: { label: '在线试玩 lixl08.github.io/neo-tank', url: 'https://lixl08.github.io/neo-tank/' }
+    },
+    {
+      name: '个人简历网站', cat: 'Vibe Coding',
+      kind: '个人品牌 · 单页响应式网站',
+      bg: '以更低成本搭建个人品牌入口，集中展示技能、项目与联系方式。',
+      actions: ['通过 Vibe Coding 完成需求拆解、页面结构、视觉风格、响应式布局与交互设计。', '使用 GitHub Pages 部署上线，集成项目链接与联系方式。'],
+      results: ['独立完成从 0 到 1 的简历网站，显著提升个人作品展示效率。'],
+      tags: ['HTML / CSS / JS', '响应式', '深浅色模式', 'GitHub Pages'],
+      link: { label: '访问 GitHub 主页', url: 'https://github.com/lixl08' }
+    },
+    {
+      name: 'AI 视频与音乐制作', cat: 'AIGC',
+      kind: 'AIGC 内容创作 · 全流程制作',
+      bg: '需要低成本、高效率产出视频与音乐内容，用于个人作品展示与项目传播。',
+      actions: ['使用 AIGC 工具完成脚本生成、分镜设计、画面生成、配音配乐与素材整理。', '结合剪映 / PR 完成剪辑、字幕、转场、调色与音效包装。'],
+      results: ['制作周期缩短，内容生产效率明显提升。'],
+      note: '沉淀：建立提示词模板、配乐库与剪辑工作流。',
+      tags: ['AIGC', '剪映', 'Premiere Pro', '提示词工程']
+    },
+    {
+      name: '个人知识库搭建', cat: '效率工具',
+      kind: '知识管理 · Work Buddy × ima',
+      bg: '学习资料和项目文档检索与复用效率低。',
+      actions: ['联合 Work Buddy 与 ima 设计知识库架构：分类目录、标签体系、问答入口与持续更新机制。', '导入课程笔记、项目文档与灵感记录并持续维护。'],
+      results: ['实现资料集中管理与语义检索，信息查找时间减少约 50%。', '知识复用率提升约 40%，形成可迭代的“个人第二大脑”。'],
+      note: '沉淀：输出知识库搭建 SOP 与标签规范，支持后续项目快速调用。',
+      tags: ['ima', 'Work Buddy', '知识体系', 'SOP']
+    }
+  ],
+  projectCats: ['全部', 'Vibe Coding', 'AIGC', '效率工具'],
 
-                // Copy email button
-                const emailBtn = document.createElement('button');
-                emailBtn.id = 'emailCopyBtn';
-                emailBtn.className = 'btn-glow inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13.5px] font-semibold text-white';
-                emailBtn.style.background = 'linear-gradient(135deg, #06b6d4 0%, #6366f1 100%)';
-                emailBtn.innerHTML = lucideIcon('mail', 'w-4 h-4') + '<span id="emailDisplay">' + escapeHtml(getEmail()) + '</span>';
-                heroActions.appendChild(emailBtn);
+  skills: [
+    {
+      group: '领域能力',
+      items: [
+        { name: 'AIGC 工具链（文本 / 图像 / 音频 / 视频）', level: 80, note: '提示词设计 · 内容生成 · 工作流搭建与结果优化' },
+        { name: 'Vibe Coding / 自然语言编程', level: 65, note: '需求拆解 · 原型设计 · 代码生成 · 调试部署' },
+        { name: '视频剪辑与后期', level: 92, note: '剪映 95% · Premiere Pro 90%，全流程独立完成' }
+      ]
+    },
+    {
+      group: '语言 / 基础',
+      items: [
+        { name: 'HTML / CSS / JavaScript', level: 60, note: '可独立完成静态网站与轻量互动应用并上线' },
+        { name: '程序设计 / 数据结构 / 算法', level: 65, note: '专业核心课程基础，持续打磨工程能力' }
+      ]
+    },
+    {
+      group: '工具链',
+      items: [
+        { name: '剪映 / Premiere Pro', level: 93, note: '字幕 · 转场 · 调色 · 音效 · 节奏包装' },
+        { name: 'PPT 与结构化表达', level: 70, note: '项目路演与汇报材料制作 · 个人信息管理' }
+      ],
+      badges: ['Git / GitHub', 'GitHub Pages', 'ima', 'Work Buddy', 'AI 知识库']
+    },
+    {
+      group: '云与认证',
+      items: [
+        { name: '云计算 / AI 应用与基础部署', level: 55, note: '了解云计算与基础部署流程' }
+      ],
+      badges: ['阿里云 Apsara Clouder 多项技能认证']
+    }
+  ],
 
-                // Phone
-                const phoneBtn = document.createElement('a');
-                phoneBtn.className = 'btn-glow inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13.5px] font-semibold text-slate-200 glass';
-                phoneBtn.href = 'tel:' + resume.contact.phone;
-                phoneBtn.innerHTML = lucideIcon('phone', 'w-4 h-4') + escapeHtml(resume.contact.phone);
-                heroActions.appendChild(phoneBtn);
+  certs: ['阿里云 Apsara Clouder 多项技能认证（共 8 项）'],
+  certImages: ['p1.png', 'p2.png', 'p3.png', 'p4.png', 'p5.png', 'p6.png', 'p7.png', 'p8.png']
+};
 
-                // GitHub
-                if (resume.contact.githubUrl) {
-                    const ghBtn = document.createElement('a');
-                    ghBtn.className = 'btn-glow inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13.5px] font-semibold text-slate-200 glass';
-                    ghBtn.href = resume.contact.githubUrl;
-                    ghBtn.target = '_blank';
-                    ghBtn.rel = 'noopener noreferrer';
-                    ghBtn.innerHTML = lucideIcon('github', 'w-4 h-4') + 'GitHub';
-                    heroActions.appendChild(ghBtn);
-                }
+/* ============================================================
+   工具函数
+   ============================================================ */
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
 
-                // Location
-                const locBtn = document.createElement('span');
-                locBtn.className = 'btn-glow inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13.5px] font-semibold text-slate-300 glass cursor-default';
-                locBtn.innerHTML = lucideIcon('map-pin', 'w-4 h-4') + escapeHtml(resume.contact.location);
-                heroActions.appendChild(locBtn);
+function h(tag, cls, html) {
+  const el = document.createElement(tag);
+  if (cls) el.className = cls;
+  if (html != null) el.innerHTML = html;
+  return el;
+}
 
-                refreshIcons();
+/* Lucide 线性图标（data-lucide 占位，渲染后由 lucide.createIcons 替换为 SVG） */
+function icon(name, size) {
+  const map = {
+    phone: 'phone',
+    mail: 'mail',
+    wechat: 'message-circle',
+    github: 'github',
+    user: 'user-round',
+    pin: 'map-pin',
+    spark: 'sparkles',
+    heart: 'heart',
+    cap: 'graduation-cap',
+    award: 'award'
+  };
+  const px = size || 16;
+  return '<i data-lucide="' + (map[name] || 'circle') + '" style="width:' + px + 'px;height:' + px + 'px"></i>';
+}
+function refreshIcons() {
+  if (window.lucide && typeof lucide.createIcons === 'function') lucide.createIcons();
+}
 
-                emailBtn.addEventListener('click', function() {
-                    const email = getEmail();
-                    copyToClipboard(email).then(function() {
-                        showToast('邮箱已复制到剪贴板');
-                        const display = document.getElementById('emailDisplay');
-                        if (display) {
-                            const original = display.textContent;
-                            display.textContent = '✓ 已复制';
-                            setTimeout(function() { display.textContent = original; }, 1600);
-                        }
-                    }).catch(function() {
-                        try { window.prompt('复制邮箱地址:', email); } catch (e) {}
-                    });
-                });
-            }
+/* 运行时拼接邮箱（防爬虫） */
+const getEmail = () => resume.contact.emailParts[0] + '@' + resume.contact.emailParts[1] + '.' + resume.contact.emailParts[2];
 
-            /* ===== Render Highlights (indicator dashboard) ===== */
-            function renderHighlights() {
-                highlightsGrid.innerHTML = '';
-                resume.highlights.forEach(function(h, idx) {
-                    const card = document.createElement('div');
-                    card.className = 'stat-card fade-hidden glass p-5 flex flex-col';
-                    let imgHtml = '';
-                    if (h.images && h.images.length) {
-                        imgHtml = '<div class="grid grid-cols-4 gap-1.5 mt-4 pt-3 border-t border-white/5" aria-label="证书缩略图">' +
-                            h.images.map(function(src) {
-                                return '<img src="' + escapeHtml(src) + '" alt="证书缩略图" class="cert-thumb" loading="lazy" data-full="' + escapeHtml(src) + '" tabindex="0" role="button">';
-                            }).join('') + '</div>';
-                    }
-                    card.innerHTML =
-                        '<div class="flex items-start justify-between mb-3">' +
-                            '<span class="inline-flex items-center justify-center w-10 h-10 rounded-lg" style="background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.22);">' +
-                                lucideIcon(h.icon, 'w-5 h-5 text-cyan-300') +
-                            '</span>' +
-                            '<span class="text-[10px] font-mono text-slate-500">0' + (idx + 1) + '</span>' +
-                        '</div>' +
-                        '<div class="mb-1">' +
-                            '<span class="stat-num text-gradient-num text-3xl font-extrabold tracking-tight leading-none">' + escapeHtml(h.stat) + '</span>' +
-                            '<span class="text-[11px] text-slate-500 ml-1.5 font-medium">' + escapeHtml(h.label || '') + '</span>' +
-                        '</div>' +
-                        '<h4 class="text-[14.5px] font-bold text-white mb-1.5 mt-1 leading-snug">' + escapeHtml(h.title) + '</h4>' +
-                        '<p class="text-[12.5px] text-slate-400 leading-relaxed">' + escapeHtml(h.desc) + '</p>' +
-                        imgHtml;
-                    highlightsGrid.appendChild(card);
-                });
+/* ============================================================
+   Hero
+   ============================================================ */
+function renderHero() {
+  const m = $('#heroMount');
+  const grid = h('div', 'hero-grid');
 
-                highlightsGrid.querySelectorAll('.cert-thumb').forEach(function(img) {
-                    img.addEventListener('click', function() {
-                        openLightbox(img.getAttribute('data-full') || img.getAttribute('src'));
-                    });
-                    img.addEventListener('keydown', function(e) {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            openLightbox(img.getAttribute('data-full') || img.getAttribute('src'));
-                        }
-                    });
-                });
+  /* 左侧文案 */
+  const left = h('div');
+  const eye = h('div', 'hero-eyebrow reveal');
+  eye.innerHTML = icon('spark', 15) + '<span>开放实习 / 项目合作 · 随时联系</span>';
+  const title = h('h1', 'reveal');
+  title.style.transitionDelay = '60ms';
+  title.innerHTML = '你好，我是 <span class="grad">' + resume.name + '</span>';
+  const role = h('div', 'hero-role reveal');
+  role.style.transitionDelay = '120ms';
+  role.innerHTML = resume.roles.map(r => '<span>' + r + '</span>').join('');
+  const intro = h('p', 'hero-intro reveal');
+  intro.style.transitionDelay = '180ms';
+  intro.textContent = resume.intro;
 
-                refreshIcons();
-                observeFadeIn(highlightsGrid.querySelectorAll('.fade-hidden'));
-            }
+  const kw = h('div', 'keyword-row reveal');
+  kw.style.transitionDelay = '240ms';
+  resume.keywords.forEach(k => kw.appendChild(h('span', 'badge ghost', k)));
 
-            /* ===== Experience ===== */
-            function hasExperienceData() {
-                return resume.experience.work.length > 0 ||
-                    resume.experience.internship.length > 0 ||
-                    resume.experience.campus.length > 0;
-            }
-            function renderExperience() {
-                if (!hasExperienceData()) {
-                    experienceSection.classList.add('hidden');
-                    if (navExpLink) navExpLink.style.display = 'none';
-                    return;
-                }
-                experienceSection.classList.remove('hidden');
-                if (navExpLink) navExpLink.style.display = '';
+  const cta = h('div', 'cta-row reveal');
+  cta.style.transitionDelay = '300ms';
 
-                const tabs = [
-                    { key: 'work', label: '工作经历', data: resume.experience.work, icon: 'building-2' },
-                    { key: 'internship', label: '实习经历', data: resume.experience.internship, icon: 'coffee' },
-                    { key: 'campus', label: '校园经历', data: resume.experience.campus, icon: 'users' }
-                ];
-                const activeTabs = tabs.filter(function(t) { return t.data.length > 0; });
-                if (activeTabs.length === 0) {
-                    experienceSection.classList.add('hidden');
-                    return;
-                }
+  const mailBtn = h('a', 'btn btn-primary');
+  mailBtn.href = 'mailto:' + getEmail();
+  mailBtn.dataset.email = getEmail();
+  mailBtn.innerHTML = icon('mail') + '<span>联系我</span>';
+  const emailCopy = h('button', 'btn btn-ghost copy');
+  emailCopy.type = 'button';
+  emailCopy.dataset.copy = getEmail();
+  emailCopy.innerHTML = icon('mail') + '<span>复制邮箱</span>';
+  const wechatBtn = h('button', 'btn btn-ghost copy');
+  wechatBtn.type = 'button';
+  wechatBtn.dataset.copy = resume.contact.wechat;
+  wechatBtn.innerHTML = icon('wechat') + '<span>微信：' + resume.contact.wechat + '</span>';
+  const phoneBtn = h('a', 'btn btn-ghost');
+  phoneBtn.href = 'tel:' + resume.contact.phone;
+  phoneBtn.innerHTML = icon('phone') + '<span>' + resume.contact.phone + '</span>';
+  const ghBtn = h('a', 'btn btn-ghost');
+  ghBtn.href = resume.contact.github.url; ghBtn.target = '_blank'; ghBtn.rel = 'noopener noreferrer';
+  ghBtn.innerHTML = icon('github') + '<span>GitHub</span>';
+  cta.append(mailBtn, emailCopy, wechatBtn, phoneBtn, ghBtn);
+  left.append(eye, title, role, intro, kw, cta);
 
-                experienceTabsContainer.innerHTML = '';
-                const tabsNav = document.createElement('div');
-                tabsNav.className = 'flex items-center gap-1 px-2 border-b border-white/5 overflow-x-auto';
-                tabsNav.setAttribute('role', 'tablist');
-                tabsNav.setAttribute('aria-label', '经历分类');
+  /* 右侧资料卡 */
+  const card = h('div', 'card profile-card reveal');
+  card.style.transitionDelay = '180ms';
+  const avatar = h('div', 'avatar');
+  if (resume.avatar) {
+    const img = document.createElement('img');
+    img.src = resume.avatar;
+    img.alt = resume.name + '的头像';
+    img.width = 88; img.height = 88;
+    img.decoding = 'async';
+    /* 图片缺失时回退到内联 SVG 占位，避免裂图 */
+    img.addEventListener('error', function () {
+      this.remove();
+      avatar.insertAdjacentHTML('afterbegin',
+        '<svg viewBox="0 0 88 88" aria-hidden="true"><defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2="1">' +
+        '<stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#818cf8"/></linearGradient></defs>' +
+        '<rect width="88" height="88" rx="44" fill="url(#ag)"/><text x="44" y="58" text-anchor="middle" font-size="36" font-weight="800" fill="#fff" font-family="PingFang SC,Microsoft YaHei,sans-serif">李</text></svg>');
+    }, { once: true });
+    avatar.appendChild(img);
+  } else {
+    avatar.innerHTML =
+      '<svg viewBox="0 0 88 88" aria-hidden="true"><defs><linearGradient id="ag" x1="0" y1="0" x2="1" y2="1">' +
+      '<stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#818cf8"/></linearGradient></defs>' +
+      '<rect width="88" height="88" rx="44" fill="url(#ag)"/><text x="44" y="58" text-anchor="middle" font-size="36" font-weight="800" fill="#fff" font-family="PingFang SC,Microsoft YaHei,sans-serif">李</text></svg>';
+  }
+  const pName = h('div', 'profile-name', resume.name);
+  const pSub = h('div', 'profile-sub mono', resume.nameEn + ' · ' + resume.meta.mbti);
+  const meta = h('div', 'meta-list');
+  const row = (ic, label, val) => {
+    const li = h('div', 'meta-item');
+    li.innerHTML = icon(ic, 16) + '<span>' + label + '：<b>' + val + '</b></span>';
+    return li;
+  };
+  const hobbyLi = h('div', 'meta-item');
+  hobbyLi.innerHTML = icon('heart', 16) + '<span>爱好：</span>';
+  const chips = h('div', 'hobby-chips');
+  resume.meta.hobbies.forEach(x => chips.appendChild(h('span', 'badge', x)));
+  hobbyLi.appendChild(chips);
+  meta.append(
+    row('user', '政治面貌', resume.meta.status),
+    row('pin', '籍贯', resume.meta.hometown),
+    hobbyLi
+  );
+  card.append(avatar, pName, pSub, meta);
 
-                activeTabs.forEach(function(tab, idx) {
-                    const btn = document.createElement('button');
-                    btn.className = 'tab-btn-2 flex items-center gap-1.5';
-                    btn.setAttribute('role', 'tab');
-                    btn.setAttribute('id', 'exp-tab-' + tab.key);
-                    btn.setAttribute('aria-controls', 'exp-panel-' + tab.key);
-                    btn.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
-                    btn.innerHTML = lucideIcon(tab.icon, 'w-3.5 h-3.5') + escapeHtml(tab.label);
-                    tabsNav.appendChild(btn);
-                });
-                experienceTabsContainer.appendChild(tabsNav);
+  grid.append(left, card);
+  m.appendChild(grid);
+}
 
-                activeTabs.forEach(function(tab, idx) {
-                    const panel = document.createElement('div');
-                    panel.className = 'tab-panel-2 p-5 sm:p-6';
-                    panel.setAttribute('role', 'tabpanel');
-                    panel.setAttribute('id', 'exp-panel-' + tab.key);
-                    panel.setAttribute('aria-labelledby', 'exp-tab-' + tab.key);
-                    if (idx > 0) panel.setAttribute('hidden', '');
+/* ============================================================
+   亮点成果
+   ============================================================ */
+function renderHighlights() {
+  const mount = $('#highlightMount');
+  resume.highlights.forEach((s, i) => {
+    const c = h('div', 'card stat reveal');
+    c.style.transitionDelay = i * 70 + 'ms';
+    c.innerHTML =
+      '<div class="stat-value">' + s.value + '</div>' +
+      '<div class="stat-label">' + s.label + '</div>' +
+      '<div class="stat-desc">' + s.desc + '</div>';
+    mount.appendChild(c);
+  });
+}
 
-                    if (tab.data.length === 0) {
-                        panel.innerHTML = '<div class="text-center py-10 text-slate-500"><i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 opacity-50"></i><p class="text-sm">暂无相关经历</p></div>';
-                    } else {
-                        const list = document.createElement('div');
-                        list.className = 'relative pl-7';
-                        list.innerHTML = '<div class="timeline-rail"></div>';
-                        tab.data.forEach(function(item) {
-                            let duties = '';
-                            if (item.duties && item.duties.length) {
-                                duties = '<ul class="mt-2 space-y-1.5">' + item.duties.map(function(d) {
-                                    return '<li class="text-[12.5px] text-slate-400 leading-relaxed pl-4 relative before:absolute before:left-0 before:top-2 before:w-1 before:h-1 before:rounded-full before:bg-cyan-400">' + escapeHtml(d) + '</li>';
-                                }).join('') + '</ul>';
-                            }
-                            const item2 = document.createElement('div');
-                            item2.className = 'relative pb-5 last:pb-0';
-                            item2.innerHTML = '<div class="timeline-dot"></div>' +
-                                '<h5 class="text-[14.5px] font-bold text-white mb-1">' + escapeHtml(item.title || item.role || '') + '</h5>' +
-                                '<div class="text-[12px] text-cyan-300/80 mb-1.5 inline-flex items-center gap-1.5">' + escapeHtml(item.company || item.org || '') + (item.period ? ' · ' + escapeHtml(item.period) : '') + '</div>' +
-                                duties;
-                            list.appendChild(item2);
-                        });
-                        panel.appendChild(list);
-                    }
-                    experienceTabsContainer.appendChild(panel);
-                });
+/* ============================================================
+   ARIA Tabs 工厂（键盘：← → Home End）
+   ============================================================ */
+function createTabs(mount, labels, onSelect, hasPanels) {
+  const list = h('div', 'tablist');
+  list.setAttribute('role', 'tablist');
+  list.setAttribute('aria-label', '内容标签切换');
+  const tabs = labels.map((label, i) => {
+    const t = h('button', 'tab');
+    t.type = 'button';
+    t.id = 'tab-' + mount.id + '-' + i;
+    t.setAttribute('role', 'tab');
+    t.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+    if (hasPanels !== false) t.setAttribute('aria-controls', 'panel-' + mount.id + '-' + i);
+    t.tabIndex = i === 0 ? 0 : -1;
+    t.textContent = label;
+    t.addEventListener('click', () => activate(i));
+    list.appendChild(t);
+    return t;
+  });
+  list.addEventListener('keydown', e => {
+    let i = tabs.indexOf(document.activeElement);
+    if (i < 0) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      i = (i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+    } else if (e.key === 'Home') { i = 0; }
+    else if (e.key === 'End') { i = tabs.length - 1; }
+    else return;
+    e.preventDefault();
+    activate(i);
+    tabs[i].focus();
+  });
+  function activate(i) {
+    tabs.forEach((t, j) => {
+      t.setAttribute('aria-selected', j === i ? 'true' : 'false');
+      t.tabIndex = j === i ? 0 : -1;
+    });
+    onSelect(i, labels[i]);
+    refreshIcons();
+  }
+  mount.appendChild(list);
+  return { activate };
+}
 
-                initTabs(experienceTabsContainer);
-                refreshIcons();
-            }
+/* ============================================================
+   经历 Tabs
+   ============================================================ */
+function renderExperience() {
+  const mount = $('#expMount');
+  const panels = resume.experience.map((g, i) => {
+    const panel = h('div', 'tab-panel');
+    panel.id = 'panel-expMount-' + i;
+    panel.setAttribute('role', 'tabpanel');
+    panel.setAttribute('aria-labelledby', 'tab-expMount-' + i);
+    panel.tabIndex = 0;
+    if (i !== 0) panel.hidden = true;
+    const tl = h('div', 'timeline');
+    g.items.forEach(it => {
+      const item = h('div', 'card tl-item');
+      const top = h('div', 'tl-top');
+      top.innerHTML =
+        '<span class="tl-org">' + it.org + '</span>' +
+        '<span class="tl-role">' + it.role + '</span>' +
+        '<span class="tl-period mono">' + it.period + '</span>' +
+        (it.location ? '<span class="tl-loc">' + icon('pin', 13) + it.location + '</span>' : '');
+      const ul = h('ul', 'tl-points');
+      it.points.forEach(p => ul.appendChild(h('li', null, p)));
+      item.append(top, ul);
+      tl.appendChild(item);
+    });
+    panel.appendChild(tl);
+    mount.appendChild(panel);
+    return panel;
+  });
+  createTabs(mount, resume.experience.map(g => g.label), i => {
+    panels.forEach((p, j) => { p.hidden = j !== i; });
+  });
+}
 
-            /* ===== Projects ===== */
-            function renderProjects() {
-                if (resume.projects.length === 0) {
-                    projectsSection.classList.add('hidden');
-                    if (navProjLink) navProjLink.style.display = 'none';
-                    return;
-                }
-                projectsSection.classList.remove('hidden');
-                if (navProjLink) navProjLink.style.display = '';
+/* ============================================================
+   项目 Tabs + 卡片
+   ============================================================ */
+function projectCard(pj) {
+  const c = h('article', 'card project-card');
+  const head = h('div', 'pj-head');
+  head.innerHTML = '<h3 class="pj-name">' + pj.name + '</h3><span class="pj-cat">' + pj.cat + '</span>';
+  const kind = h('div', 'pj-kind', pj.kind);
 
-                const categories = {};
-                resume.projects.forEach(function(p) {
-                    const cat = p.category || '全部项目';
-                    if (!categories[cat]) categories[cat] = [];
-                    categories[cat].push(p);
-                });
-                const catKeys = Object.keys(categories);
+  const row = (label, arr) => {
+    const r = h('div', 'pj-row');
+    r.innerHTML = '<b>' + label + '</b>';
+    if (Array.isArray(arr)) {
+      const ul = h('ul');
+      arr.forEach(x => ul.appendChild(h('li', null, x)));
+      r.appendChild(ul);
+    } else {
+      r.appendChild(document.createTextNode(arr));
+    }
+    return r;
+  };
+  const tags = h('div', 'pj-tags');
+  pj.tags.forEach(t => tags.appendChild(h('span', 'badge', t)));
 
-                projectsTabsContainer.innerHTML = '';
-                const tabsNav = document.createElement('div');
-                tabsNav.className = 'flex items-center gap-1 px-2 border-b border-white/5 overflow-x-auto';
-                tabsNav.setAttribute('role', 'tablist');
-                tabsNav.setAttribute('aria-label', '项目分类');
+  c.append(head, kind, row('背景', pj.bg), row('行动', pj.actions), row('结果', pj.results));
+  if (pj.note) c.appendChild(row('沉淀', pj.note));
+  c.appendChild(tags);
 
-                catKeys.forEach(function(cat, idx) {
-                    const btn = document.createElement('button');
-                    btn.className = 'tab-btn-2 flex items-center gap-1.5';
-                    btn.setAttribute('role', 'tab');
-                    btn.setAttribute('id', 'proj-tab-' + idx);
-                    btn.setAttribute('aria-controls', 'proj-panel-' + idx);
-                    btn.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
-                    btn.textContent = cat;
-                    tabsNav.appendChild(btn);
-                });
-                projectsTabsContainer.appendChild(tabsNav);
+  if (pj.link) {
+    const foot = h('div', 'pj-foot');
+    const a = h('a', 'pj-link');
+    a.href = pj.link.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    a.innerHTML = pj.link.label + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>';
+    foot.appendChild(a);
+    c.appendChild(foot);
+  }
+  return c;
+}
 
-                catKeys.forEach(function(cat, idx) {
-                    const panel = document.createElement('div');
-                    panel.className = 'tab-panel-2 p-5 sm:p-6';
-                    panel.setAttribute('role', 'tabpanel');
-                    panel.setAttribute('id', 'proj-panel-' + idx);
-                    panel.setAttribute('aria-labelledby', 'proj-tab-' + idx);
-                    if (idx > 0) panel.setAttribute('hidden', '');
+function renderProjects() {
+  const mount = $('#projectMount');
+  const grid = h('div', 'project-grid');
+  grid.setAttribute('aria-live', 'polite');
+  mount.appendChild(grid);
 
-                    const grid = document.createElement('div');
-                    grid.className = 'grid grid-cols-1 sm:grid-cols-2 gap-4';
-                    categories[cat].forEach(function(p) {
-                        const card = document.createElement('div');
-                        card.className = 'glass p-4 stat-card';
-                        let techHtml = '';
-                        if (p.tech && p.tech.length) {
-                            techHtml = '<div class="flex flex-wrap gap-1.5 my-3">' +
-                                p.tech.map(function(t) {
-                                    return '<span class="pill-cyan" style="font-size:10.5px;padding:3px 9px;">' + escapeHtml(t) + '</span>';
-                                }).join('') + '</div>';
-                        }
-                        let linkHtml = '';
-                        if (p.link) {
-                            linkHtml = '<a href="' + escapeHtml(p.link) + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[12px] font-semibold text-cyan-300 hover:text-cyan-200 transition">' + lucideIcon('external-link', 'w-3 h-3') + '查看链接</a>';
-                        }
-                        card.innerHTML =
-                            '<h4 class="text-[14px] font-bold text-white mb-1">' + escapeHtml(p.name) + '</h4>' +
-                            '<p class="text-[12px] text-slate-500 mb-2">' + escapeHtml(p.period || '') + '</p>' +
-                            techHtml +
-                            '<p class="text-[12.5px] text-slate-400 leading-relaxed mb-3">' + escapeHtml(p.result || p.description || '') + '</p>' +
-                            linkHtml;
-                        grid.appendChild(card);
-                    });
-                    panel.appendChild(grid);
-                    projectsTabsContainer.appendChild(panel);
-                });
+  function draw(cat) {
+    grid.innerHTML = '';
+    const list = cat === '全部' ? resume.projects : resume.projects.filter(p => p.cat === cat);
+    if (!list.length) {
+      grid.appendChild(h('div', 'pj-empty', '该分类下暂无项目'));
+      return;
+    }
+    list.forEach((pj, i) => {
+      const card = projectCard(pj);
+      card.classList.add('reveal');
+      card.style.transitionDelay = i * 60 + 'ms';
+      grid.appendChild(card);
+    });
+    observeReveals(grid);
+  }
+  createTabs(mount, resume.projectCats, (i, label) => draw(label), false);
+  draw('全部');
+}
 
-                initTabs(projectsTabsContainer);
-                refreshIcons();
-            }
+/* ============================================================
+   技能矩阵
+   ============================================================ */
+function renderSkills() {
+  const mount = $('#skillMount');
+  const groupIcons = { '领域能力': 'sparkles', '语言 / 基础': 'code-2', '工具链': 'wrench', '云与认证': 'cloud' };
+  resume.skills.forEach((g, gi) => {
+    const c = h('div', 'card skill-group reveal');
+    c.style.transitionDelay = gi * 70 + 'ms';
+    c.appendChild(h('h3', null, icon(groupIcons[g.group] || 'cpu', 18) + g.group));
+    const list = h('div', 'skill-list');
+    g.items.forEach(s => {
+      const row = h('div', 'skill-row');
+      row.innerHTML =
+        '<div class="skill-name"><span>' + s.name + '</span><span class="skill-pct">' + s.level + '%</span></div>' +
+        (s.note ? '<div class="skill-note">' + s.note + '</div>' : '') +
+        '<div class="bar"><div class="bar-fill" style="--w:' + s.level + '%"></div></div>';
+      list.appendChild(row);
+    });
+    c.appendChild(list);
+    if (g.badges && g.badges.length) {
+      const bd = h('div', 'skill-badges');
+      g.badges.forEach(b => bd.appendChild(h('span', 'badge violet', b)));
+      c.appendChild(bd);
+    }
+    mount.appendChild(c);
+  });
+}
 
-            /* ===== Tabs ===== */
-            function initTabs(container) {
-                const tabs = container.querySelectorAll('.tab-btn-2');
-                const panels = container.querySelectorAll('.tab-panel-2');
-                function activate(index) {
-                    tabs.forEach(function(t, i) {
-                        t.setAttribute('aria-selected', i === index ? 'true' : 'false');
-                    });
-                    panels.forEach(function(p, i) {
-                        if (i === index) {
-                            p.removeAttribute('hidden');
-                            p.classList.add('fade-in-anim');
-                            setTimeout(function() { p.classList.remove('fade-in-anim'); }, 320);
-                        } else {
-                            p.setAttribute('hidden', '');
-                        }
-                    });
-                }
-                tabs.forEach(function(tab, idx) {
-                    tab.addEventListener('click', function() { activate(idx); });
-                    tab.addEventListener('keydown', function(e) {
-                        let n = -1;
-                        if (e.key === 'ArrowRight') { e.preventDefault(); n = (idx + 1) % tabs.length; }
-                        else if (e.key === 'ArrowLeft') { e.preventDefault(); n = (idx - 1 + tabs.length) % tabs.length; }
-                        else if (e.key === 'Home') { e.preventDefault(); n = 0; }
-                        else if (e.key === 'End') { e.preventDefault(); n = tabs.length - 1; }
-                        if (n > -1 && n !== idx) { activate(n); tabs[n].focus(); }
-                    });
-                });
-                activate(0);
-            }
+/* ============================================================
+   教育与证书
+   ============================================================ */
+function renderEdu() {
+  const mount = $('#eduMount');
+  const e = resume.education;
 
-            /* ===== Render Skills ===== */
-            function renderSkills() {
-                skillsGrid.innerHTML = '';
-                resume.skills.forEach(function(cat) {
-                    const card = document.createElement('div');
-                    card.className = 'glass p-5 fade-hidden stat-card';
+  const edu = h('div', 'card edu-card reveal');
+  const ico = h('div', 'edu-icon');
+  ico.innerHTML = icon('cap', 24);
+  const body = h('div');
+  body.innerHTML =
+    '<div class="edu-school">' + e.school + '</div>' +
+    '<div class="edu-degree">' + e.degree + '</div>' +
+    '<div class="edu-meta"><span class="mono">' + icon('spark', 13) + ' ' + e.period + '</span><span>' + icon('pin', 13) + ' ' + e.location + '</span></div>';
+  if (e.courses && e.courses.length) {
+    const cs = h('div', 'courses');
+    cs.innerHTML = '<h4>主修课程</h4>';
+    const tags = h('div', 'course-tags');
+    e.courses.forEach(x => tags.appendChild(h('span', 'badge ghost', x)));
+    cs.appendChild(tags);
+    body.appendChild(cs);
+  }
+  edu.append(ico, body);
 
-                    let tagsHtml = '<div class="flex flex-wrap gap-1.5 mb-4">';
-                    cat.items.forEach(function(item) {
-                        let extra = '';
-                        if (item.highlight) extra = 'style="background: rgba(34, 211, 238, 0.14); border-color: rgba(34, 211, 238, 0.4); color: #67e8f9;"';
-                        else if (item.learning) extra = 'style="border-style: dashed; border-color: rgba(129, 140, 248, 0.35); color: #818cf8; background: rgba(99, 102, 241, 0.08);"';
-                        const label = item.learning ? item.name + ' (学习中)' : item.name;
-                        tagsHtml += '<span class="pill-cyan" ' + extra + '>' + escapeHtml(label) + '</span>';
-                    });
-                    tagsHtml += '</div>';
+  const hasCertImages = resume.certImages && resume.certImages.length;
+  const cert = h('div', 'card cert-card reveal' + (hasCertImages ? ' wide' : ''));
+  cert.style.transitionDelay = '80ms';
+  cert.appendChild(h('h3', null, icon('award', 18) + '获奖与证书'));
 
-                    let barsHtml = '<div class="space-y-3 mt-4 pt-4 border-t border-white/5">';
-                    cat.items.slice(0, 4).forEach(function(item) {
-                        const displayLevel = item.learning ? Math.floor(Math.random() * 8) + 1 : item.level;
-                        barsHtml +=
-                            '<div>' +
-                                '<div class="flex justify-between text-[11.5px] mb-1.5"><span class="text-slate-300 font-medium">' + escapeHtml(item.name) + '</span><span class="text-cyan-300 font-mono">' + displayLevel + '%</span></div>' +
-                                '<div class="h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="skill-bar-fill h-full rounded-full" style="width:' + displayLevel + '%"></div></div>' +
-                            '</div>';
-                    });
-                    barsHtml += '</div>';
+  if (hasCertImages) {
+    const summary = h('div', 'cert-summary');
+    summary.innerHTML = icon('award', 16) +
+      '<span>阿里云 Apsara Clouder 系列技能认证，共 ' + resume.certImages.length + ' 项 · 点击图片可查看大图</span>';
+    const gallery = h('div', 'cert-gallery');
+    resume.certImages.forEach((src, i) => {
+      const t = document.createElement('img');
+      t.className = 'cert-thumb';
+      t.src = src;
+      t.alt = '阿里云 Apsara Clouder 认证证书 ' + (i + 1) + ' / ' + resume.certImages.length;
+      t.width = 260; t.height = 190;
+      t.loading = 'lazy';
+      t.decoding = 'async';
+      t.dataset.full = src;
+      t.addEventListener('error', function () {
+        /* 单张缺失时以占位卡代替，不影响其余证书 */
+        const ph = h('div', 'cert-thumb');
+        ph.style.display = 'grid';
+        ph.style.placeItems = 'center';
+        ph.style.fontSize = '12px';
+        ph.style.color = 'rgb(var(--c-mute))';
+        ph.textContent = '证书 ' + (i + 1);
+        this.replaceWith(ph);
+      });
+      gallery.appendChild(t);
+    });
+    cert.append(summary, gallery);
+  } else if (resume.certs && resume.certs.length) {
+    const ul = h('ul', 'cert-list');
+    resume.certs.forEach(x => {
+      ul.appendChild(h('li', null, icon('award', 17) + '<span>' + x + '</span>'));
+    });
+    cert.appendChild(ul);
+  } else {
+    cert.appendChild(h('p', 'skill-note', '暂无证书信息'));
+  }
 
-                    card.innerHTML =
-                        '<div class="flex items-center gap-2.5 mb-4">' +
-                            '<span class="inline-flex items-center justify-center w-8 h-8 rounded-lg" style="background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.22);">' +
-                                lucideIcon(cat.icon, 'w-4 h-4 text-cyan-300') +
-                            '</span>' +
-                            '<h4 class="text-[14.5px] font-bold text-white">' + escapeHtml(cat.category) + '</h4>' +
-                        '</div>' +
-                        tagsHtml + barsHtml;
-                    skillsGrid.appendChild(card);
-                });
-                refreshIcons();
-                observeFadeIn(skillsGrid.querySelectorAll('.fade-hidden'));
-            }
+  mount.append(edu, cert);
+}
 
-            /* ===== Render Education & Certificates ===== */
-            function renderEducationCertificates() {
-                eduCertGrid.innerHTML = '';
+/* ============================================================
+   页脚
+   ============================================================ */
+function renderFooter() {
+  $('#year').textContent = new Date().getFullYear();
+  $('#updated').textContent = resume.updated;
+  const fl = $('#footerLinks');
+  const gh = h('a');
+  gh.href = resume.contact.github.url; gh.target = '_blank'; gh.rel = 'noopener noreferrer';
+  gh.textContent = 'GitHub';
+  const mail = h('a');
+  mail.href = 'mailto:' + getEmail();
+  mail.textContent = 'Email';
+  const top = h('a', null, '返回顶部');
+  top.href = '#hero';
+  fl.append(gh, mail, top);
+}
 
-                if (resume.education && resume.education.school) {
-                    const eduCard = document.createElement('div');
-                    eduCard.className = 'glass p-5 fade-hidden stat-card';
-                    let coursesHtml = '';
-                    if (resume.education.courses && resume.education.courses.length) {
-                        coursesHtml = '<div class="mt-4 pt-4 border-t border-white/5"><div class="text-[11px] font-semibold text-slate-500 mb-2.5 uppercase tracking-wider">主修课程</div><div class="flex flex-wrap gap-1.5">' +
-                            resume.education.courses.map(function(c) {
-                                return '<span class="pill-cyan" style="font-size:11.5px;padding:3px 10px;">' + escapeHtml(c) + '</span>';
-                            }).join('') + '</div></div>';
-                    }
-                    eduCard.innerHTML =
-                        '<div class="flex items-center gap-2.5 mb-3.5">' +
-                            '<span class="inline-flex items-center justify-center w-8 h-8 rounded-lg" style="background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.22);">' +
-                                lucideIcon('graduation-cap', 'w-4 h-4 text-cyan-300') +
-                            '</span>' +
-                            '<h4 class="text-[14.5px] font-bold text-white">教育背景</h4>' +
-                        '</div>' +
-                        '<div class="text-[15px] font-bold text-white">' + escapeHtml(resume.education.school) + '</div>' +
-                        '<div class="text-[13px] text-cyan-300/90 mt-1">' + escapeHtml(resume.education.major) + ' · ' + escapeHtml(resume.education.degree) + '</div>' +
-                        '<div class="inline-flex items-center gap-1.5 text-[12px] text-slate-400 mt-2 mb-1">' + lucideIcon('calendar', 'w-3 h-3') + escapeHtml(resume.education.period) + '</div>' +
-                        (resume.education.gpa ? '<div class="text-[12px] text-slate-400">GPA: ' + escapeHtml(resume.education.gpa) + '</div>' : '') +
-                        coursesHtml;
-                    eduCertGrid.appendChild(eduCard);
-                }
+/* ============================================================
+   进入视口动效 + 进度条
+   ============================================================ */
+let revealObserver = null;
+function observeReveals(scope) {
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          revealObserver.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+  }
+  $$('.reveal:not(.in)', scope || document).forEach(el => revealObserver.observe(el));
+}
 
-                if (resume.certificates && resume.certificates.length) {
-                    const certCard = document.createElement('div');
-                    certCard.className = 'glass p-5 fade-hidden stat-card';
-                    let certHtml = '<div class="flex items-center gap-2.5 mb-3.5">' +
-                        '<span class="inline-flex items-center justify-center w-8 h-8 rounded-lg" style="background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.22);">' +
-                            lucideIcon('award', 'w-4 h-4 text-cyan-300') +
-                        '</span>' +
-                        '<h4 class="text-[14.5px] font-bold text-white">获奖与证书</h4></div>';
-                    certHtml += '<div class="space-y-2">';
-                    resume.certificates.forEach(function(cert) {
-                        certHtml +=
-                            '<div class="flex items-start gap-2.5 p-2.5 rounded-lg border border-white/5" style="background: rgba(15, 23, 42, 0.4);">' +
-                                '<span class="inline-flex items-center justify-center w-7 h-7 rounded-md flex-shrink-0" style="background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.22);">' +
-                                    lucideIcon('badge-check', 'w-4 h-4 text-cyan-300') +
-                                '</span>' +
-                                '<span class="text-[12.5px] text-slate-300 leading-relaxed pt-0.5">' + escapeHtml(cert) + '</span>' +
-                            '</div>';
-                    });
-                    certHtml += '</div>';
-                    certCard.innerHTML = certHtml;
-                    eduCertGrid.appendChild(certCard);
-                }
+/* ============================================================
+   交互：主题 / 打印 / 复制 / 返回顶部 / 导航高亮 / Toast / 灯箱
+   ============================================================ */
+let toastTimer = null;
+function toast(msg) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
+}
 
-                refreshIcons();
-                observeFadeIn(eduCertGrid.querySelectorAll('.fade-hidden'));
-            }
+function copyText(text, label, btn) {
+  const done = () => {
+    toast((label || '内容') + '已复制：' + text);
+    if (btn) {
+      btn.classList.add('copied');
+      setTimeout(() => btn.classList.remove('copied'), 1500);
+    }
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  } else {
+    fallbackCopy(text, done);
+  }
+}
+function fallbackCopy(text, done) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.cssText = 'position:fixed;opacity:0;left:-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); done(); } catch (e) { toast('复制失败，请手动复制'); }
+  ta.remove();
+}
 
-            /* ===== Fade-in observer ===== */
-            function observeFadeIn(elements) {
-                if (!('IntersectionObserver' in window)) {
-                    elements.forEach(function(el) {
-                        el.classList.add('fade-visible');
-                        el.classList.remove('fade-hidden');
-                    });
-                    return;
-                }
-                const observer = new IntersectionObserver(function(entries) {
-                    entries.forEach(function(entry) {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('fade-visible');
-                            entry.target.classList.remove('fade-hidden');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
-                elements.forEach(function(el) { observer.observe(el); });
-            }
+function initInteractions() {
+  /* 主题切换 */
+  $('#themeToggle').addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('data-theme');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('resume-theme', next); } catch (e) {}
+  });
 
-            /* ===== Nav visibility ===== */
-            function updateNavVisibility() {
-                if (navExpLink) navExpLink.style.display = hasExperienceData() ? '' : 'none';
-                if (navProjLink) navProjLink.style.display = resume.projects.length === 0 ? 'none' : '';
-            }
+  /* 打印 */
+  $('#printBtn').addEventListener('click', () => window.print());
 
-            /* ===== Init ===== */
-            function init() {
-                renderHero();
-                renderHighlights();
-                renderExperience();
-                renderProjects();
-                renderSkills();
-                renderEducationCertificates();
-                updateNavVisibility();
-                toggleBackToTop();
-                refreshIcons();
-            }
-            init();
+  /* 复制（事件委托，值在运行时生成） */
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.copy');
+    if (btn && btn.dataset.copy) {
+      e.preventDefault();
+      copyText(btn.dataset.copy, btn.dataset.copy.indexOf('@') > -1 ? '邮箱' : '微信号', btn);
+    }
+  });
 
-            window.__resumeData = resume;
-            window.__renderAll = function() {
-                renderExperience();
-                renderProjects();
-                updateNavVisibility();
-                refreshIcons();
-            };
-        })();
-    </script>
+  /* 返回顶部 */
+  const back = $('#backTop');
+  const onScroll = () => back.classList.toggle('show', window.scrollY > 520);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  back.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* 导航当前区块高亮 */
+  const navMap = new Map();
+  $$('.nav-links a').forEach(a => navMap.set(a.getAttribute('href').slice(1), a));
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      const a = navMap.get(en.target.id);
+      if (a && en.isIntersecting) {
+        $$('.nav-links a').forEach(x => x.classList.remove('active'));
+        a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  ['highlights', 'experience', 'projects', 'skills', 'education'].forEach(id => {
+    const sec = document.getElementById(id);
+    if (sec) spy.observe(sec);
+  });
+
+  /* 证书大图灯箱 */
+  const lightbox = $('#lightbox');
+  const lbImg = $('#lightboxImg');
+  const openLb = src => {
+    if (!src) return;
+    lbImg.src = src;
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+  };
+  const closeLb = () => {
+    lightbox.hidden = true;
+    lbImg.removeAttribute('src');
+    document.body.style.overflow = '';
+  };
+  document.addEventListener('click', e => {
+    const thumb = e.target.closest('.cert-thumb');
+    if (thumb && thumb.dataset && thumb.dataset.full) {
+      openLb(thumb.dataset.full);
+    } else if (!lightbox.hidden && (e.target === lightbox || e.target === lbImg || e.target.closest('#lbClose'))) {
+      closeLb();
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !lightbox.hidden) closeLb();
+  });
+}
+
+/* ============================================================
+   启动：数据驱动渲染（缺失模块自动不渲染）
+   ============================================================ */
+function boot() {
+  if (resume.contact && resume.name) renderHero();
+  if (resume.highlights && resume.highlights.length) renderHighlights();
+  if (resume.experience && resume.experience.length) renderExperience();
+  if (resume.projects && resume.projects.length) renderProjects();
+  if (resume.skills && resume.skills.length) renderSkills();
+  if (resume.education || (resume.certs && resume.certs.length)) renderEdu();
+  renderFooter();
+  initInteractions();
+  observeReveals();
+  refreshIcons();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', boot);
+} else {
+  boot();
+}
+</script>
 </body>
 </html>
